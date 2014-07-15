@@ -8,7 +8,7 @@
         "cartalyst/sentry": "2.1.*",
         "michelf/php-markdown": "1.4.*",
         "imagine/Imagine": "v0.5.0",
-        "way/generators": "dev-master",
+        "way/generators": "2.*",
         "codeguy/upload": "1.*"
     },
     "require-dev": {
