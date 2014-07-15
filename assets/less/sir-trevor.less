@@ -1,0 +1,59 @@
+.st-fa-icon {
+    margin: 0 0 .2em 0;
+    display: block;
+}
+
+.st-block__editor {
+    position: relative;
+}
+
+.st-block-controls__top:hover:before {
+    color: #34e0c2;
+    background: #f3f3f3;
+}
+.st-block-controls__top:before {
+    width: 100%;
+    display: block;
+    text-align: center;
+    font-size: 1.875em;
+    padding: 0.3em 0;
+    line-height: 0.9;
+    border-radius: 0.2em;
+}
+[data-icon]:before,
+[data-icon-after]:after {
+//     display: inline-block;
+    font-family: FontAwesome;
+//     font-style: normal;
+//     font-weight: normal;
+//     line-height: 1;
+//     -webkit-font-smoothing: antialiased;
+//     -moz-osx-font-smoothing: grayscale;
+//     // font-family: 'ST-Icons';
+//     // speak: none;
+//     // -webkit-font-feature-settings: "liga", "dlig";
+//     // -moz-font-feature-settings: "liga=1, dlig=1";
+//     // -moz-font-feature-settings: "liga", "dlig";
+//     // -ms-font-feature-settings: "liga", "dlig";
+//     // -o-font-feature-settings: "liga", "dlig";
+//     // font-feature-settings: "liga", "dlig";
+//     // text-rendering: optimizeLegibility;
+//     // font-weight: normal;
+//     // font-variant: normal;
+//     // text-transform: none;
+//     // line-height: 1;
+//     // -webkit-font-smoothing: antialiased;
+//     content: attr(data-icon);
+}
+
+[data-icon="add"]:before, [data-icon-after="add"]:after {
+    content: @fa-var-plus;
+}
+
+// [data-icon="move"]:before {
+//     content: @fa-var-arrows-v;
+// }
+
+// [data-icon="bin"]:before {
+//     content: @fa-var-trash-o;
+// }

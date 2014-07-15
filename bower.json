@@ -1,0 +1,29 @@
+{
+  "name": "Igor",
+  "version": "0.1.0",
+  "dependencies": {
+    "jquery": "~2.1.0",
+    "backbone": "latest",
+    "underscore": "latest",
+    "backbone.marionette": "latest",
+    "momentjs": "latest",
+    "fontawesome": "~4.1.0",
+    "bootstrap": "~3.1.1",
+    "morris.js": "~0.5.0",
+    "raphael": "~2.1.2",
+    "backbone.syphon": "~0.4.1",
+    "parsleyjs": "2.0.2",
+    "bootswatch": "~3.1.*",
+    "backbone.validation": "git://github.com/thedersen/backbone.validation#~0.8.2",
+    "speakingurl": "~0.8.4",
+    "sir-trevor-js": "latest",
+    "marked": "~0.3.2",
+    "codemirror": "~4.3.0",
+    "js-md5": "~1.1.0"
+  },
+  "devDependencies": {},
+  "resolutions": {
+    "underscore": "1.6.0",
+    "jquery": ">1.10.0"
+  }
+}

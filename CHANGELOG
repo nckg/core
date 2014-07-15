@@ -1,0 +1,11 @@
+0.1.0:
+    codename: Admiral Gial Ackbar
+    date: 2013-10-11
+    changes:
+        - Initial setup
+0.2.0:
+    codename: Jar Jar Binks
+    date: 2014-06-11
+    changes:
+        - Rewritten admin side
+        - Extracted to package

@@ -1,0 +1,57 @@
+.action-row {
+    margin-top: @line-height-computed;
+    margin-bottom: @line-height-computed;
+}
+
+.treeview {
+    list-style: none;
+    display: table;
+    width: 100%;
+
+    .list:first-child {
+        display: block;
+        position: relative;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+    }
+
+    .list-item {
+        display: block;
+        position: relative;
+        margin: 0;
+        padding: 0;
+        clear: both;
+
+        .list-item-wrap {
+            margin: 0;
+
+            h5 {
+                margin-bottom: 0;
+            }
+
+            .manipulation {
+                display: none;
+                padding: 0;
+                font-size: 85%;
+            }
+
+            &:hover {
+                background-color: @gray-lighter;
+
+                .manipulation {
+                    display: inline;
+                }
+            }
+        }
+
+        .list {
+            padding-left: 16px;
+
+            .list-item {
+                padding-left: 10px;
+                border-left: 1px solid @gray-light;
+            }
+        }
+    }
+}

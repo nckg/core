@@ -1,0 +1,27 @@
+
+/* Use the following CSS code if you want to have a class per icon */
+/*
+Instead of a list of all class selectors,
+you can use the generic selector below, but it's slower:
+[class*="icon-"] {
+*/
+.icon-bold, .icon-italic, .icon-quote, .icon-unordered-list, .icon-ordered-list, .icon-link, .icon-image, .icon-play, .icon-music, .icon-contract, .icon-fullscreen, .icon-question, .icon-info, .icon-undo, .icon-redo, .icon-code, .icon-preview {
+    font-family: FontAwesome;
+}
+.icon-bold:before { content: @fa-var-bold; }
+.icon-italic:before { content: @fa-var-italic; }
+.icon-quote:before { content: @fa-var-quote-left; }
+.icon-unordered-list:before { content: @fa-var-list; }
+.icon-ordered-list:before { content: @fa-var-list-ol; }
+.icon-link:before { content: @fa-var-chain; }
+.icon-image:before { content: @fa-var-file-image-o; }
+.icon-play:before { content: "\e008"; }
+.icon-music:before { content: "\e009"; }
+.icon-contract:before { content: "\e00a"; }
+.icon-fullscreen:before { content: "\e00b"; }
+.icon-question:before { content: "\e00c"; }
+.icon-info:before { content: @fa-var-info; }
+.icon-undo:before { content: @fa-var-undo; }
+.icon-redo:before { content: @fa-var-repeat; }
+.icon-code:before { content: @fa-var-code; }
+.icon-preview:before { content: @fa-var-eye; }

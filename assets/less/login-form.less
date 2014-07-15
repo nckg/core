@@ -1,0 +1,70 @@
+// A login form
+//
+// .form-signin-header      - A form header
+// .form-control            - Overwrite bootstrap default .form-control with this class
+// .form-control:focus      - Subtle hover highlight.
+// input[type="text"]       - Normal input field
+// input[type="password"]   - Password input field
+//
+body {
+  &#login {
+    background: url("../admin/images/login.jpg") no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+  }
+}
+
+#login {
+    small#credit {
+        position: absolute;
+        bottom: 10px;
+        right: 10px;
+        color: @body-bg;
+    }
+
+    .form-signin {
+        max-width: 330px;
+        padding: 15px;
+        margin: 0 auto;
+
+        .form-signin-heading {
+            color: @brand-primary;
+            margin-bottom: 10px;
+        }
+
+        // Overwrite some
+        .form-control {
+            position: relative;
+            font-size: 16px;
+            height: auto;
+            padding: 10px;
+            -webkit-box-sizing: border-box;
+               -moz-box-sizing: border-box;
+                    box-sizing: border-box;
+
+            &:focus {
+                z-index: 2;
+            }
+        }
+
+        input[type="text"] {
+            margin-bottom: -1px;
+            border-bottom-left-radius: 0;
+            border-bottom-right-radius: 0;
+        }
+
+        input[type="password"] {
+            margin-bottom: 10px;
+            border-top-left-radius: 0;
+            border-top-right-radius: 0;
+        }
+
+        #version-info {
+            text-align: center;
+            margin-top: 20px;
+            color: @gray-lighter;
+        }
+    }
+}

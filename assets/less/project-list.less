@@ -1,0 +1,45 @@
+#project-list {
+    width: 100%;
+
+    ul {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+
+        li {
+
+            a, a:hover, a:active, a:focus {
+                font-size: 15px;
+                border-left: none;
+                border-right: none;
+                color: @text-color;
+                text-decoration: none;
+                border-radius: 0;
+
+                &.active {
+                    background-color: @list-group-hover-bg;
+                    border-color: @list-group-hover-bg;
+
+                    &:after{
+                        content: '';
+                        position: absolute;
+                        left: 100%;
+                        top: 50%;
+                        margin-top: -13px;
+                        border-left: 0;
+                        border-bottom: 13px solid transparent;
+                        border-top: 13px solid transparent;
+                        border-left: 10px solid @list-group-hover-bg;
+                    }
+                }
+            }
+
+
+            .summary {
+                font-size: @font-size-small;
+                color: @gray-light;
+            }
+        }
+
+    }
+}
