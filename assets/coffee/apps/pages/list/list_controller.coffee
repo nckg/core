@@ -18,5 +18,16 @@
             new List.Layout()
 
         getListView: ( pages ) ->
-            new List.Pages
+            list = new List.Pages
                 collection: pages
+
+            list.on 'childview:change:state', ( view, args ) ->
+                model = args.model
+                model.set 'active', if model.get( 'active' ) is "0" then "1" else "0"
+                model.save()
+
+            @listenTo list, "childview:page:delete:clicked", (child, args) ->
+                model = args.model
+                if confirm "Pagina \"#{ model.get( 'title' ) }\" verwijderen?" then model.destroy() else false
+
+            list

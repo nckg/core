@@ -81,10 +81,13 @@ class PageController extends BaseController {
             \Input::get('title'),
             \Input::get('body'),
             \Input::get('page_id'),
-            \Input::get('template_id')
+            \Input::get('template_id'),
+            \Input::get('active')
         );
 
-        $this->bus->execute($request);
+        $response = $this->bus->execute($request);
+
+        return $response->page;
     }
 
     /**

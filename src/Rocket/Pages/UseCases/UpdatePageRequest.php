@@ -11,9 +11,10 @@ class UpdatePageRequest
     public $body;
     public $pageId;
     public $templateId;
+    public $active;
 
 
-    public function __construct(Page $page, User $user, $title, $body, $pageId, $templateId)
+    public function __construct(Page $page, User $user, $title, $body, $pageId, $templateId, $active)
     {
         $this->page = $page;
         $this->user = $user;
@@ -21,5 +22,6 @@ class UpdatePageRequest
         $this->body = $body;
         $this->pageId = $pageId;
         $this->templateId = $templateId;
+        $this->active = $active;
     }
 }

@@ -9,8 +9,19 @@
          * @return {Object}
         ###
         attributes: ->
-            attrs = { class: 'alert' }
+            attrs =
+                class: 'alert alert-top'
+
             if @options.extraClassName
-                attrs.class = "alert #{ @options.extraClassName }"
+                attrs.class = "alert  alert-top #{ @options.extraClassName }"
 
             attrs
+
+        onShow: ->
+            @timeOut = setTimeout =>
+                @$el.addClass "animated fadeOut"
+            , 1000
+
+        onBeforeClose: ->
+            clearTimeout @timeOut
+

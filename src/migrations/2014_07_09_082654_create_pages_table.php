@@ -33,6 +33,8 @@ class CreatePagesTable extends Migration {
         {
             $table->increments('id');
             $table->string('title');
+            $table->boolean('active')->default(1);
+            $table->boolean('editable')->default(1);
             $table->integer('page_id')->nullable();
             $table->integer('template_id');
             $table->integer('user_id');

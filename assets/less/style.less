@@ -1,9 +1,8 @@
 // Import sir trevor stuff
-@import (less) "../vendor/libraries/leptureeditor/editor.css";
-@import (less) "../vendor/components/codemirror/lib/codemirror.css";
-@import (less) "../vendor/components/codemirror/theme/solarized.css";
+@import (less) "../vendor/components/animate.css/animate.css";
 @import (less) "../vendor/components/parsleyjs/src/parsley.css";
-@import (less) "../vendor/components/sir-trevor-js/sir-trevor.css";
+@import (less) "../vendor/components/medium-editor/dist/css/medium-editor.css";
+@import (less) "../vendor/components/medium-editor/dist/css/themes/bootstrap.css";
 
 // Core variables and mixins
 @import "../vendor/components/bootstrap/less/variables.less";
@@ -49,7 +48,7 @@
 
 // Components w/ JavaScript
 // @import "../vendor/components/bootstrap/less/modals.less";
-// @import "../vendor/components/bootstrap/less/tooltip.less";
+@import "../vendor/components/bootstrap/less/tooltip.less";
 // @import "../vendor/components/bootstrap/less/popovers.less";
 // @import "../vendor/components/bootstrap/less/carousel.less";
 //
@@ -77,13 +76,20 @@
 @import "../vendor/components/fontawesome/less/icons";
 @import "../vendor/components/fontawesome/less/font-awesome.less";
 
-// Igor classes
+// Import z-indexes // --------------------------------------
+@import 'z-index';
+
+// Import modules // ----------------------------------------
+@import 'pageItem';
+@import 'alertTop';
+
+// Rocket classes
 @import 'grid';
 @import 'header';
 @import 'form-header';
 @import 'log';
-@import 'sir-trevor';
 @import 'loading';
 @import 'treeview';
 @import 'editor';
 @import 'login-form';
+

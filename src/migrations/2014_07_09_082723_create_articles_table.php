@@ -29,9 +29,9 @@ class CreateArticlesTable extends Migration {
         {
             $table->increments('id');
             $table->string('title');
+            $table->text('summary');
             $table->integer('page_id')->nullable();
             $table->integer('user_id');
-            $table->text('body');
             $table->timestamps();
             $table->softDeletes();
         });

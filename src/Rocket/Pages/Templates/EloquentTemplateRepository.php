@@ -11,4 +11,13 @@ class EloquentTemplateRepository extends EloquentRepository implements TemplateR
         $this->model = $model;
     }
 
+    /**
+     * @return mixed
+     */
+    public function getAll()
+    {
+        return $this->model->where('editable', true)->get();
+    }
+
+
 }

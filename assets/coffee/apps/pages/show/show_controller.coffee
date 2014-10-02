@@ -12,15 +12,11 @@
             templates = App.request 'template:entities'
 
             # Listen to the page created event and then send out a page:created event.
-            @listenTo page, 'updated', =>
+            @listenTo page, "updated", ->
                 App.vent.trigger 'page:updated', page
 
             # create a layout
             @view = @getView page, pages, templates
-
-            @listenTo @view, 'page:delete:clicked', ( args ) ->
-                model = args.model
-                if confirm "Pagina \"#{ model.get( 'title' ) }\" verwijderen?" then model.destroy() else false
 
             @show @view,
                 loading:

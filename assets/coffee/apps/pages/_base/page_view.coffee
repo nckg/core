@@ -11,8 +11,7 @@
             pages: '#page_id'
             template: '#template_id'
             submit: '[data-action="submit"],[type="submit"]'
-            destroy: '[data-action="destroy"]'
-            sirTrevor: '.js-st-instance'
+            editor: '.rocket-editor'
             inputSlug: '[name="slug"]'
             inputTitle: '[name="title"]'
             prefix: '.input-group-addon.prefix'
@@ -23,9 +22,6 @@
             'blur @ui.inputTitle': 'showSlug'
             'keyup @ui.inputSlug': 'showSlug'
             'change @ui.pages': 'changePrefix'
-
-        triggers:
-            'click @ui.destroy': 'page:delete:clicked'
 
         showSlug: ->
             @ui.inputSlug.val getSlug( @ui.inputTitle.val() )
@@ -51,29 +47,20 @@
                 "#{ prefix }#{ model.get( 'title' ) }"
             , @model.get( 'page_id' )
 
+            @editor = new MediumEditor @ui.editor,
+                buttons: [ 'bold', 'italic', 'underline', 'anchor', 'header1', 'header2', 'quote', 'unorderedlist' ]
 
-            @sirTrevor = new SirTrevor.Editor
-                # set element
-                el: @ui.sirTrevor
-
-                # set default type when instantiating
-                defaultType: 'Markdown'
-
-                # set available block types
-                blockTypes: [
-                    'Markdown'
-                    'Heading'
-                    'Image'
-                    'Video'
-                ]
+        onBeforeClose: ->
+            @editor.deactivate()
 
         # override in child to format save data in a particular way.
         # It could be setting a particular date format or setting the
         # correct case on strings, for example.
         formatSaveData: ( data ) ->
-            SirTrevor.onBeforeSubmit()
+#            SirTrevor.onBeforeSubmit()
 
             # get data from sir Trevor
-            data.body = @sirTrevor.$el.val()
+            body = @editor.serialize()
+            data.body = body[ 'page-body' ][ 'value' ]
 
             data

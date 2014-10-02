@@ -38,12 +38,10 @@
     #     App.navigate 'post'
     #     API.list()
 
-    # # Listen for the post created or saved then show alert and redirect.
+    # Listen for the post created or saved then show alert and redirect.
     App.vent.on 'page:created page:updated', ( item ) ->
-        console.log item
-        App.execute 'alert:show:success', 'Great! page created'
-        # App.navigate 'post/edit/#{item.id}'
-        # API.edit item.id, item
+        App.execute 'alert:show:success', "Page \"#{ item.get( 'title' ) }\" was successfully saved!"
+        App.navigate "pages/edit/#{ item.id }", trigger: yes
 
     # # When the new post link is clicked then show the add routine.
     # App.vent.on 'post:new:clicked post:new', ->

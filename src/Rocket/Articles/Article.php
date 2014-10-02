@@ -28,16 +28,31 @@ class Article extends Model implements PresenterInterface
         return 'Rocket\Pages\ArticlePresenter';
     }
 
-    public static function register(User $user, $title, $body, $pageId)
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function page()
     {
-        $article = new static([
+        return $this->belongsTo('\Rocket\Pages\Page');
+    }
+
+    /**
+     * @param User $user
+     * @param $title
+     * @param $summary
+     * @param $pageId
+     * @return static
+     */
+    public static function register(User $user, $title, $summary, $pageId)
+    {
+        self::unguard();
+
+        return new static([
             'user_id' => $user->id,
             'title' => $title,
-            'body' => $body,
+            'summary' => $summary,
             'page_id' => $pageId,
         ]);
-
-        return $article;
     }
 
 

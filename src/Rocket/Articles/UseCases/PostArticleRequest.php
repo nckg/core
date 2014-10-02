@@ -9,13 +9,22 @@ class PostArticleRequest
     public $body;
     public $pageId;
     public $templateId;
+    public $summary;
 
-    public function __construct(User $user, $title, $body, $pageId, $templateId)
+    /**
+     * @param User $user
+     * @param $title
+     * @param $summary
+     * @param $body
+     * @param $templateId
+     */
+    public function __construct(User $user, $title, $summary, $body, $templateId, $pageId)
     {
         $this->user = $user;
         $this->title = $title;
         $this->body = $body;
-        $this->pageId = $pageId;
         $this->templateId = $templateId;
+        $this->summary = $summary;
+        $this->pageId = $pageId;
     }
 }

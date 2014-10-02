@@ -32,6 +32,7 @@ class PostArticleHandler implements Handler
      * @param ArticleRepository $repository
      * @param PageRepository $pageRepository
      * @param Dispatcher $dispatcher
+     * @param CommandBus $bus
      */
     public function __construct(ArticleRepository $repository, PageRepository $pageRepository, Dispatcher $dispatcher, CommandBus $bus)
     {
@@ -47,16 +48,26 @@ class PostArticleHandler implements Handler
      */
     public function handle($request)
     {
-        $article = Article::register($request->user, $request->title, $request->body, null);
-        $this->repository->save($article);
-
-        $body = '{"data": [{"type": "blog", "data": {"type": "detail", "id": ' . $article->id . '} } ] }';
-        $pageRequest = new PostPageRequest($request->user, $request->title, $body, $request->pageId, \Config::get('core::view.article.template_id'));
+        $pageRequest = new PostPageRequest(
+            $request->user,
+            $request->title,
+            $request->body,
+            $request->pageId,
+            $request->templateId,
+            false
+        );
 
         // create a new page for it
         $pageResponse = $this->bus->execute($pageRequest);
 
-        $pageResponse->page->articles()->associate($article);
+        $article = Article::register(
+            $request->user,
+            $request->title,
+            $request->summary,
+            null
+        );
+
+        $pageResponse->page->article()->save($article);
 
         return new PostArticleResponse($article);
     }

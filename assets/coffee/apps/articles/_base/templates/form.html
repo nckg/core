@@ -11,9 +11,6 @@
 
             <div class="col-sm-12">
                 <button class="btn btn-xs btn-success" type="submit"><i class="fa fa-check"></i> Opslaan</button>
-                <% if ( id ) { %>
-                <button class="btn btn-xs btn-danger" data-action="destroy" type="button"><i class="fa fa-trash-o"></i></button>
-                <% } %>
             </div>
         </div>
     </div>
@@ -32,12 +29,21 @@
         <!--</div>-->
     <!--</div>-->
 
+    <div class="row">
+        <div class="col-sm-12">
+            <label>Samenvatting</label>
+            <div class="form-group">
+                <textarea class="form-control" name="summary"><%= summary %></textarea>
+            </div>
+        </div>
+    </div>
+
     <hr>
 
     <div class="row">
         <div class="col-sm-12">
             <div class="form-group">
-                <textarea class="form-control js-st-instance" name="body"><%= body %></textarea>
+                <div id="page-body" class="rocket-editor"><%= page.body %></div>
             </div>
         </div>
     </div>

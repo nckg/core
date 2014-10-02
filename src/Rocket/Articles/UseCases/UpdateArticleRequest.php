@@ -5,21 +5,31 @@ use Rocket\Articles\Article;
 
 class UpdateArticleRequest
 {
-    public $page;
+    /*
+     * Article
+     */
+    public $article;
+    /*
+     * User
+     */
     public $user;
     public $title;
     public $body;
-    public $pageId;
-    public $templateId;
+    public $summary;
 
-
-    public function __construct(Article $page, User $user, $title, $body, $pageId, $templateId)
+    /**
+     * @param Article $article
+     * @param User $user
+     * @param $title
+     * @param $body
+     * @param $summary
+     */
+    public function __construct(Article $article, User $user, $title, $body, $summary)
     {
-        $this->page = $page;
+        $this->article = $article;
         $this->user = $user;
         $this->title = $title;
         $this->body = $body;
-        $this->pageId = $pageId;
-        $this->templateId = $templateId;
+        $this->summary = $summary;
     }
 }

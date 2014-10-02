@@ -26,6 +26,7 @@ class CreateTemplatesTable extends Migration {
             $table->increments('id');
             $table->string('name');
             $table->string('template');
+            $table->boolean('editable')->default(true);
             $table->boolean('default')->default(false);
             $table->timestamps();
             $table->softDeletes();

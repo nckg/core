@@ -4,7 +4,7 @@ this["JST"]["alert/show/templates/flash.html"] = function(obj) {
 obj || (obj = {});
 var __t, __p = '', __e = _.escape;
 with (obj) {
-__p += '<a data-dismiss="alert" class="close"><i class="fa fa-times"></i></a>\n' +
+__p +=
 ((__t = ( message )) == null ? '' : __t);
 
 }
@@ -13,18 +13,15 @@ return __p
 
 this["JST"]["articles/_base/templates/form.html"] = function(obj) {
 obj || (obj = {});
-var __t, __p = '', __e = _.escape, __j = Array.prototype.join;
-function print() { __p += __j.call(arguments, '') }
+var __t, __p = '', __e = _.escape;
 with (obj) {
 __p += '<form class="form" data-parsley-validate>\n    <div class="row">\n        <div class="header">\n            <div class="col-sm-6">\n                <label>Titel</label>\n                <div class="form-group">\n                    <input type="text" name="title" class="form-control input-lg" placeholder="Titel" value="' +
 ((__t = ( title )) == null ? '' : __t) +
-'" required="required">\n                    <small class="help-block">De titel van je pagina. Bijvoorbeeld: <em>Over ons</em></small>\n                </div>\n            </div>\n\n            <div class="col-sm-12">\n                <button class="btn btn-xs btn-success" type="submit"><i class="fa fa-check"></i> Opslaan</button>\n                ';
- if ( id ) { ;
-__p += '\n                <button class="btn btn-xs btn-danger" data-action="destroy" type="button"><i class="fa fa-trash-o"></i></button>\n                ';
- } ;
-__p += '\n            </div>\n        </div>\n    </div>\n    <!--<div class="row">-->\n        <!--<div class="col-sm-6">-->\n            <!--<div class="form-group">-->\n                <!--<label for="page_id">Bovenliggende pagina</label>-->\n                <!--<select id="page_id" name="page_id" class="form-control" required="required"></select>-->\n            <!--</div>-->\n        <!--</div>-->\n        <!--<div class="col-sm-6">-->\n            <!--<div class="form-group">-->\n                <!--<label for="template_id">Template</label>-->\n                <!--<select id="template_id" name="template_id" class="form-control" required="required"></select>-->\n            <!--</div>-->\n        <!--</div>-->\n    <!--</div>-->\n\n    <hr>\n\n    <div class="row">\n        <div class="col-sm-12">\n            <div class="form-group">\n                <textarea class="form-control js-st-instance" name="body">' +
-((__t = ( body )) == null ? '' : __t) +
-'</textarea>\n            </div>\n        </div>\n    </div>\n\n    <div class="row">\n        <div class="col-sm-12 text-right">\n            <button class="ui btn btn-link" type="reset">Annuleer en ga terug</button>\n            <button class="btn btn-success" type="submit"><i class="fa fa-check"></i> Opslaan</button>\n        </div>\n    </div>\n</form>';
+'" required="required">\n                    <small class="help-block">De titel van je pagina. Bijvoorbeeld: <em>Over ons</em></small>\n                </div>\n            </div>\n\n            <div class="col-sm-12">\n                <button class="btn btn-xs btn-success" type="submit"><i class="fa fa-check"></i> Opslaan</button>\n            </div>\n        </div>\n    </div>\n    <!--<div class="row">-->\n        <!--<div class="col-sm-6">-->\n            <!--<div class="form-group">-->\n                <!--<label for="page_id">Bovenliggende pagina</label>-->\n                <!--<select id="page_id" name="page_id" class="form-control" required="required"></select>-->\n            <!--</div>-->\n        <!--</div>-->\n        <!--<div class="col-sm-6">-->\n            <!--<div class="form-group">-->\n                <!--<label for="template_id">Template</label>-->\n                <!--<select id="template_id" name="template_id" class="form-control" required="required"></select>-->\n            <!--</div>-->\n        <!--</div>-->\n    <!--</div>-->\n\n    <div class="row">\n        <div class="col-sm-12">\n            <label>Samenvatting</label>\n            <div class="form-group">\n                <textarea class="form-control" name="summary">' +
+((__t = ( summary )) == null ? '' : __t) +
+'</textarea>\n            </div>\n        </div>\n    </div>\n\n    <hr>\n\n    <div class="row">\n        <div class="col-sm-12">\n            <div class="form-group">\n                <div id="page-body" class="rocket-editor">' +
+((__t = ( page.body )) == null ? '' : __t) +
+'</div>\n            </div>\n        </div>\n    </div>\n\n    <div class="row">\n        <div class="col-sm-12 text-right">\n            <button class="ui btn btn-link" type="reset">Annuleer en ga terug</button>\n            <button class="btn btn-success" type="submit"><i class="fa fa-check"></i> Opslaan</button>\n        </div>\n    </div>\n</form>';
 
 }
 return __p
@@ -44,7 +41,7 @@ this["JST"]["articles/list/templates/grid.html"] = function(obj) {
 obj || (obj = {});
 var __t, __p = '', __e = _.escape;
 with (obj) {
-__p += '<div class="treeview"></div>';
+__p += '<div class="pagesList"></div>';
 
 }
 return __p
@@ -52,13 +49,26 @@ return __p
 
 this["JST"]["articles/list/templates/item.html"] = function(obj) {
 obj || (obj = {});
-var __t, __p = '', __e = _.escape;
+var __t, __p = '', __e = _.escape, __j = Array.prototype.join;
+function print() { __p += __j.call(arguments, '') }
 with (obj) {
-__p += '<h5><a href="#articles/edit/' +
+__p += '<div class="pageItem-status">\n    <a href="#" class="pageItem-state js-pageItem-state" data-toggle="tooltip" data-placement="top" title="' +
+((__t = ( ( page.active == '1' ) ? 'Gepubliceerd' : 'Verborgen' )) == null ? '' : __t) +
+'">\n        ';
+ if ( page.active == '1' ) { ;
+__p += '\n        <i class="text-success fa fa-3x fa-check-circle"></i>\n        ';
+ } else { ;
+__p += '\n        <i class="text-muted fa fa-3x fa-circle-o"></i>\n        ';
+ } ;
+__p += '\n    </a>\n</div><!-- /.pageItem-state -->\n\n<div class="pageItem-meta">\n    <a href="#articles/edit/' +
 ((__t = ( id )) == null ? '' : __t) +
-'" class="list-group-item-heading">' +
+'" class="pageItem-title">' +
 ((__t = ( title )) == null ? '' : __t) +
-'</a></h5>';
+'</a>\n    <div class="pageItem-date">\n        ' +
+((__t = ( moment( created_at, Config.date_format ).fromNow() )) == null ? '' : __t) +
+'\n    </div>\n</div><!-- /.pageItem-meta -->\n\n<div class="pageItem-options">\n    <a class="pageItem-option" href="#articles/edit/' +
+((__t = ( id )) == null ? '' : __t) +
+'">\n        <i class="fa fa-fw fa-2x fa-pencil"></i>\n    </a>\n    <a href="#" class="pageItem-option text-danger" data-action="destroy">\n        <i class="fa fa-fw fa-2x fa-trash-o"></i>\n    </a>\n</div><!-- /.pageItem-options -->\n';
 
 }
 return __p
@@ -68,7 +78,7 @@ this["JST"]["articles/list/templates/layout.html"] = function(obj) {
 obj || (obj = {});
 var __t, __p = '', __e = _.escape;
 with (obj) {
-__p += '<div class="row action-row">\n    <div class="col-md-offset-6 col-md-6 text-right">\n        <a href="#articles/add" class="btn btn-success btn-sm"><i class="fa fa-plus"></i> Toevoegen</a>\n    </div>\n</div>\n\n<div class="row">\n    <div class="col-md-12">\n        <div id="article-list" class="list-group"></div>\n    </div>\n</div>';
+__p += '<div class="row action-row">\n    <div class="col-md-offset-6 col-md-6 text-right">\n        <a href="#articles/add" class="btn btn-success btn-sm"><i class="fa fa-plus"></i> Toevoegen</a>\n    </div>\n</div>\n\n<div class="row">\n    <div id="article-list" class="col-md-12">\n    </div>\n</div>';
 
 }
 return __p
@@ -84,11 +94,39 @@ __p += '<form class="form" data-parsley-validate>\n    <div class="row">\n      
 return __p
 };
 
+this["JST"]["articles/show/templates/header.html"] = function(obj) {
+obj || (obj = {});
+var __t, __p = '', __e = _.escape;
+with (obj) {
+__p += '<div class="col-md-8">\n    <h3><a href="#project/' +
+((__t = ( id )) == null ? '' : __t) +
+'">' +
+((__t = ( title )) == null ? '' : __t) +
+'</a> <a href="' +
+((__t = ( reference )) == null ? '' : __t) +
+'" target="_blank"><i class="fa fa-external-link"></i></a></h3>\n</div>\n<div class="col-md-4">\n    <div class="btn-group pull-right">\n        <button type="button" class="btn btn-sm btn-primary dropdown-toggle" data-toggle="dropdown">\n            <i class="fa fa-cog fa-fw"></i>\n        </button>\n        <ul class="dropdown-menu pull-right">\n            <li><a href="#" data-action="trigger-new-build"><i class="fa fa-rotate-right fa-fw"></i> Start new build</a></li>\n            <li><a href="#project/' +
+((__t = ( id )) == null ? '' : __t) +
+'/settings"><i class="fa fa-cog fa-fw"></i> Settings</a></li>\n        </ul>\n    </div>\n</div>';
+
+}
+return __p
+};
+
+this["JST"]["articles/show/templates/layout.html"] = function(obj) {
+obj || (obj = {});
+var __t, __p = '', __e = _.escape;
+with (obj) {
+__p += '';
+
+}
+return __p
+};
+
 this["JST"]["header/list/templates/header.html"] = function(obj) {
 obj || (obj = {});
 var __t, __p = '', __e = _.escape;
 with (obj) {
-__p += '<nav class="navbar navbar-default" role="navigation">\n    <div class="container">\n        <!-- Brand and toggle get grouped for better mobile display -->\n        <div class="navbar-header">\n            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">\n                <span class="sr-only">Toggle navigation</span>\n                <span class="icon-bar"></span>\n                <span class="icon-bar"></span>\n                <span class="icon-bar"></span>\n            </button>\n            <!--<a class="navbar-brand" href="#">-->\n                <!--<i class="fa fa-rocket"></i> Rocketship CMS-->\n            <!--</a>-->\n        </div>\n\n        <!-- Collect the nav links, forms, and other content for toggling -->\n        <div class="collapse navbar-collapse">\n            <ul class="nav navbar-nav" id="navigation">\n                <li><a href="#pages"><i class="fa fa-files-o"></i> Pagina\'s</a></li>\n                <li><a href="#articles"><i class="fa fa-pencil"></i> Artikels</a></li>\n                <li><a href="#templates"><i class="fa fa-th-large"></i> Layouts</a></li>\n            </ul>\n\n            <ul class="nav navbar-nav navbar-right">\n                <li class="user-dropdown dropdown">\n                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">\n                        <img src="" class="avatar img-rounded" width="21" height="21">\n                        <b class="caret"></b>\n                    </a>\n                    <ul class="dropdown-menu pull-right">\n                        <li><a href="/admin/logout"><i class="fa fa-power-off"></i> Afmelden</a></li>\n                    </ul>\n                </li>\n\n            </ul>\n        </div>\n    </div>\n</nav>';
+__p += '<nav class="navbar navbar-default" role="navigation">\n    <div class="container">\n        <!-- Brand and toggle get grouped for better mobile display -->\n        <div class="navbar-header">\n            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">\n                <span class="sr-only">Toggle navigation</span>\n                <span class="icon-bar"></span>\n                <span class="icon-bar"></span>\n                <span class="icon-bar"></span>\n            </button>\n            <!--<a class="navbar-brand" href="#">-->\n                <!--<i class="fa fa-rocket"></i> Rocketship CMS-->\n            <!--</a>-->\n        </div>\n\n        <!-- Collect the nav links, forms, and other content for toggling -->\n        <div class="collapse navbar-collapse">\n            <ul class="nav navbar-nav" id="navigation">\n                <li><a href="#pages"><i class="fa fa-files-o"></i> Pagina\'s</a></li>\n                <li><a href="#articles"><i class="fa fa-pencil"></i> Artikels</a></li>\n            </ul>\n\n            <ul class="nav navbar-nav navbar-right">\n                <li class="user-dropdown dropdown">\n                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">\n                        <img src="" class="avatar img-rounded" width="21" height="21">\n                        <b class="caret"></b>\n                    </a>\n                    <ul class="dropdown-menu pull-right">\n                        <li><a href="/admin/logout"><i class="fa fa-power-off"></i> Afmelden</a></li>\n                    </ul>\n                </li>\n\n            </ul>\n        </div>\n    </div>\n</nav>';
 
 }
 return __p
@@ -96,8 +134,7 @@ return __p
 
 this["JST"]["pages/_base/templates/form.html"] = function(obj) {
 obj || (obj = {});
-var __t, __p = '', __e = _.escape, __j = Array.prototype.join;
-function print() { __p += __j.call(arguments, '') }
+var __t, __p = '', __e = _.escape;
 with (obj) {
 __p += '<form class="form" data-parsley-validate>\n    <div class="row">\n        <div class="header">\n            <div class="col-sm-6">\n                <label>Titel</label>\n                <div class="form-group">\n                    <input type="text" name="title" class="form-control input-lg" placeholder="Titel" value="' +
 ((__t = ( title )) == null ? '' : __t) +
@@ -105,13 +142,9 @@ __p += '<form class="form" data-parsley-validate>\n    <div class="row">\n      
 ((__t = ( path.replace( slug, '' ) )) == null ? '' : __t) +
 '</span>\n                        <input type="text" name="slug" class="form-control input-lg" placeholder="URL" value="' +
 ((__t = ( slug )) == null ? '' : __t) +
-'">\n                    </div>\n                    <small class="help-block">De link naar je pagina. Bijvoorbeeld: <em>/over-ons/</em></small>\n                </div>\n            </div>\n            <div class="col-sm-12">\n                <button class="btn btn-xs btn-success" type="submit"><i class="fa fa-check"></i> Opslaan</button>\n                ';
- if ( id ) { ;
-__p += '\n                <button class="btn btn-xs btn-danger" data-action="destroy" type="button"><i class="fa fa-trash-o"></i></button>\n                ';
- } ;
-__p += '\n            </div>\n        </div>\n    </div>\n    <div class="row">\n        <div class="col-sm-6">\n            <div class="form-group">\n                <label for="page_id">Bovenliggende pagina</label>\n                <select id="page_id" name="page_id" class="form-control" required="required"></select>\n            </div>\n        </div>\n        <div class="col-sm-6">\n            <div class="form-group">\n                <label for="template_id">Template</label>\n                <select id="template_id" name="template_id" class="form-control" required="required"></select>\n            </div>\n        </div>\n    </div>\n\n    <hr>\n\n    <div class="row">\n        <div class="col-sm-12">\n            <div class="form-group">\n                <textarea class="form-control js-st-instance" name="body">' +
+'">\n                    </div>\n                    <small class="help-block">De link naar je pagina. Bijvoorbeeld: <em>/over-ons/</em></small>\n                </div>\n            </div>\n            <div class="col-sm-12">\n                <button class="btn btn-xs btn-success" type="submit"><i class="fa fa-check"></i> Opslaan</button>\n            </div>\n        </div>\n    </div>\n    <div class="row">\n        <div class="col-sm-6">\n            <div class="form-group">\n                <label for="page_id">Bovenliggende pagina</label>\n                <select id="page_id" name="page_id" class="form-control" required="required"></select>\n            </div>\n        </div>\n        <div class="col-sm-6">\n            <div class="form-group">\n                <label for="template_id">Template</label>\n                <select id="template_id" name="template_id" class="form-control" required="required"></select>\n            </div>\n        </div>\n    </div>\n\n    <hr>\n\n    <div class="row">\n        <div class="col-sm-12">\n            <div class="form-group">\n                <div id="page-body" class="rocket-editor">' +
 ((__t = ( body )) == null ? '' : __t) +
-'</textarea>\n            </div>\n        </div>\n    </div>\n\n    <div class="row">\n        <div class="col-sm-12 text-right">\n            <button class="ui btn btn-link" type="reset">Annuleer en ga terug</button>\n            <button class="btn btn-success" type="submit"><i class="fa fa-check"></i> Opslaan</button>\n        </div>\n    </div>\n</form>';
+'</div>\n            </div>\n        </div>\n    </div>\n\n    <div class="row">\n        <div class="col-sm-12 text-right">\n            <button class="ui btn btn-link" type="reset">Annuleer en ga terug</button>\n            <button class="btn btn-success" type="submit"><i class="fa fa-check"></i> Opslaan</button>\n        </div>\n    </div>\n</form>';
 
 }
 return __p
@@ -132,7 +165,30 @@ this["JST"]["pages/list/templates/grid.html"] = function(obj) {
 obj || (obj = {});
 var __t, __p = '', __e = _.escape;
 with (obj) {
-__p += '<div class="treeview"></div>';
+__p += '<div class="pagesList"></div>';
+
+}
+return __p
+};
+
+this["JST"]["pages/list/templates/item-disabled.html"] = function(obj) {
+obj || (obj = {});
+var __t, __p = '', __e = _.escape, __j = Array.prototype.join;
+function print() { __p += __j.call(arguments, '') }
+with (obj) {
+__p += '<div class="pageItem-status">\n    <span class="pageItem-state" data-toggle="tooltip" data-placement="top" title="' +
+((__t = ( ( active == '1' ) ? 'Gepubliceerd' : 'Verborgen' )) == null ? '' : __t) +
+'">\n        ';
+ if ( active == '1' ) { ;
+__p += '\n        <i class="text-success fa fa-3x fa-check-circle"></i>\n        ';
+ } else { ;
+__p += '\n        <i class="text-muted fa fa-3x fa-circle-o"></i>\n        ';
+ } ;
+__p += '\n    </span>\n</div><!-- /.pageItem-state -->\n\n<div class="pageItem-meta">\n    <span class="pageItem-title">' +
+((__t = ( title )) == null ? '' : __t) +
+'</span>\n    <div class="pageItem-slug">\n        /' +
+((__t = ( path )) == null ? '' : __t) +
+'\n    </div>\n</div><!-- /.pageItem-meta -->';
 
 }
 return __p
@@ -140,15 +196,26 @@ return __p
 
 this["JST"]["pages/list/templates/item.html"] = function(obj) {
 obj || (obj = {});
-var __t, __p = '', __e = _.escape;
+var __t, __p = '', __e = _.escape, __j = Array.prototype.join;
+function print() { __p += __j.call(arguments, '') }
 with (obj) {
-__p += '<h5><a href="#pages/edit/' +
+__p += '<div class="pageItem-status">\n    <a href="#" class="pageItem-state js-pageItem-state" data-toggle="tooltip" data-placement="top" title="' +
+((__t = ( ( active == '1' ) ? 'Gepubliceerd' : 'Verborgen' )) == null ? '' : __t) +
+'">\n        ';
+ if ( active == '1' ) { ;
+__p += '\n        <i class="text-success fa fa-3x fa-check-circle"></i>\n        ';
+ } else { ;
+__p += '\n        <i class="text-muted fa fa-3x fa-circle-o"></i>\n        ';
+ } ;
+__p += '\n    </a>\n</div><!-- /.pageItem-state -->\n\n<div class="pageItem-meta">\n    <a href="#pages/edit/' +
 ((__t = ( id )) == null ? '' : __t) +
-'" class="list-group-item-heading">' +
+'" class="pageItem-title">' +
 ((__t = ( title )) == null ? '' : __t) +
-'</a></h5>\n<small class="text-muted">/' +
+'</a>\n    <div class="pageItem-slug">\n        /' +
 ((__t = ( path )) == null ? '' : __t) +
-'</small>';
+'\n    </div>\n</div><!-- /.pageItem-meta -->\n\n<div class="pageItem-options">\n    <a class="pageItem-option" href="#pages/edit/' +
+((__t = ( id )) == null ? '' : __t) +
+'">\n        <i class="fa fa-fw fa-2x fa-pencil"></i>\n    </a>\n    <a href="#" class="pageItem-option text-danger" data-action="destroy">\n        <i class="fa fa-fw fa-2x fa-trash-o"></i>\n    </a>\n</div><!-- /.pageItem-options -->\n';
 
 }
 return __p
@@ -158,7 +225,7 @@ this["JST"]["pages/list/templates/layout.html"] = function(obj) {
 obj || (obj = {});
 var __t, __p = '', __e = _.escape;
 with (obj) {
-__p += '<div class="row action-row">\n    <div class="col-md-offset-6 col-md-6 text-right">\n        <a href="#pages/add" class="btn btn-success btn-sm"><i class="fa fa-plus"></i> Toevoegen</a>\n    </div>\n</div>\n\n<div class="row">\n    <div class="col-md-12">\n        <div id="project-list" class="list-group"></div>\n    </div>\n</div>';
+__p += '<div class="row action-row">\n    <div class="col-md-offset-6 col-md-6 text-right">\n        <a href="#pages/add" class="btn btn-success btn-sm"><i class="fa fa-plus"></i> Toevoegen</a>\n    </div>\n</div>\n\n<div class="row">\n    <div class="col-md-12 pages">\n    </div>\n</div>';
 
 }
 return __p
@@ -504,137 +571,11 @@ window.ParsleyConfig = {
   errorTemplate: '<div></div>'
 };
 
-SirTrevor.BlockControl.prototype.render = function() {
-  this.$el.html("<i class=\"fa fa-3x st-fa-icon " + (_.result(this.block_type, 'icon_name')) + "\"></i>" + (_.result(this.block_type, 'title')));
-  return this;
-};
-
-SirTrevor.BlockReorder.prototype.attributes = function() {
-  return {
-    'html': '<i class="fa fa-arrows-v"></i>',
-    'draggable': 'true'
-  };
-};
-
-SirTrevor.BlockDeletion.prototype.attributes = function() {
-  return {
-    'html': '<i class="fa fa-trash-o"></i>',
-    'draggable': 'true'
-  };
-};
-
-SirTrevor.Blocks.Heading.prototype.icon_name = "fa-font";
-
-SirTrevor.Blocks.Text.prototype.icon_name = "fa-pencil";
-
-SirTrevor.Blocks.Image.prototype.icon_name = "fa-picture-o";
-
-SirTrevor.Blocks.Image.prototype.loadData = function(data) {
-  this.$editor.html($("<img>", {
-    src: data.public_path + "/" + data.name
-  }));
-};
-
-SirTrevor.Blocks.Video.prototype.icon_name = "fa-film";
-
-SirTrevor.Blocks.Tweet.prototype.icon_name = "fa-twitter";
-
-SirTrevor.Blocks.List.prototype.icon_name = "fa-list-ul";
-
-SirTrevor.Blocks.Quote.prototype.icon_name = "fa-quote-left";
 
 
-/*
-Interface of Editor.
- */
-var __hasProp = {}.hasOwnProperty,
-  __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
 
-SirTrevor.Blocks.Markdown = (function(_super) {
-  __extends(Markdown, _super);
 
-  function Markdown() {
-    return Markdown.__super__.constructor.apply(this, arguments);
-  }
 
-  Markdown.prototype.type = "markdown";
-
-  Markdown.prototype.title = function() {
-    return 'Markdown';
-  };
-
-  Markdown.prototype.editorHTML = '<textarea class="st-required st-text-block"></textarea>';
-
-  Markdown.prototype.icon_name = 'fa-paragraph';
-
-  Markdown.prototype.toData = function() {
-    var content, dataObj;
-    SirTrevor.log("toData for " + this.blockID);
-    dataObj = {};
-    if (!this.editor) {
-      return;
-    }
-    this.editor.codemirror.save();
-    content = this.editor.codemirror.getValue();
-    if (content.length > 0) {
-      dataObj.text = content;
-    }
-    if (!_.isEmpty(dataObj)) {
-      this.setData(dataObj);
-    }
-    return dataObj;
-  };
-
-  Markdown.prototype.loadData = function(data) {
-    data = _.defaults(data, {
-      text: ''
-    });
-    return this.getTextBlock().text(data.text);
-  };
-
-  Markdown.prototype.onBlockRender = function() {
-    this.editor = new Editor({
-      element: this.getTextBlock()[0],
-      status: []
-    });
-    return setTimeout((function(_this) {
-      return function() {
-        return _this.editor.codemirror.refresh();
-      };
-    })(this), 1);
-  };
-
-  Markdown.prototype.toMarkdown = function(markdown) {
-    return markdown;
-  };
-
-  Markdown.prototype.toHTML = function(html) {
-    return html;
-  };
-
-  return Markdown;
-
-})(SirTrevor.Block);
-
-var __hasProp = {}.hasOwnProperty,
-  __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
-
-SirTrevor.Blocks.Video = (function(_super) {
-  __extends(Video, _super);
-
-  function Video() {
-    return Video.__super__.constructor.apply(this, arguments);
-  }
-
-  Video.prototype.droppable = false;
-
-  Video.prototype.pastable = true;
-
-  Video.prototype.icon_name = 'fa-youtube-play';
-
-  return Video;
-
-})(SirTrevor.Blocks.Video);
 
 var Storage;
 
@@ -726,10 +667,7 @@ this.Rocket = (function(Backbone, Marionette) {
     }
   });
   App.on('start', function() {
-    this.startHistory();
-    return SirTrevor.setDefaults({
-      uploadUrl: App.request('get:url:api') + '/image'
-    });
+    return this.startHistory();
   });
   return App;
 })(Backbone, Marionette);
@@ -892,8 +830,11 @@ this.Rocket.module('Entities', function(Entities, App, Backbone, Marionette, $, 
 
     Article.prototype.defaults = {
       id: null,
-      body: '',
-      title: ''
+      summary: '',
+      title: '',
+      page: {
+        body: ''
+      }
     };
 
     Article.prototype.urlRoot = function() {
@@ -1662,12 +1603,24 @@ this.Rocket.module('AlertApp.Show', function(Show, App, Backbone, Marionette, $,
     View.prototype.attributes = function() {
       var attrs;
       attrs = {
-        "class": 'alert'
+        "class": 'alert alert-top'
       };
       if (this.options.extraClassName) {
-        attrs["class"] = "alert " + this.options.extraClassName;
+        attrs["class"] = "alert  alert-top " + this.options.extraClassName;
       }
       return attrs;
+    };
+
+    View.prototype.onShow = function() {
+      return this.timeOut = setTimeout((function(_this) {
+        return function() {
+          return _this.$el.addClass("animated fadeOut");
+        };
+      })(this), 1000);
+    };
+
+    View.prototype.onBeforeClose = function() {
+      return clearTimeout(this.timeOut);
     };
 
     return View;
@@ -1688,32 +1641,31 @@ this.Rocket.module('Views', function(Views, App, Backbone, Marionette, $, _) {
 
     ArticleView.prototype.template = 'articles/_base/templates/form';
 
+    ArticleView.prototype.returnUrl = 'articles';
+
     ArticleView.prototype.ui = {
       form: 'form',
       submit: '[data-action="submit"],[type="submit"]',
-      destroy: '[data-action="destroy"]',
-      sirTrevor: '.js-st-instance'
+      editor: '.rocket-editor'
     };
 
     ArticleView.prototype.events = {
       'click @ui.submit': 'save'
     };
 
-    ArticleView.prototype.triggers = {
-      'click @ui.destroy': 'page:delete:clicked'
+    ArticleView.prototype.onRender = function() {
+      console.log(this.model);
+      return this.editor = new MediumEditor(this.ui.editor);
     };
 
-    ArticleView.prototype.onRender = function() {
-      return this.sirTrevor = new SirTrevor.Editor({
-        el: this.ui.sirTrevor,
-        defaultType: 'Markdown',
-        blockTypes: ['Markdown', 'Heading', 'Image', 'Video']
-      });
+    ArticleView.prototype.onBeforeClose = function() {
+      return this.editor.deactivate();
     };
 
     ArticleView.prototype.formatSaveData = function(data) {
-      SirTrevor.onBeforeSubmit();
-      data.body = this.sirTrevor.$el.val();
+      var body;
+      body = this.editor.serialize();
+      data.body = body['page-body']['value'];
       return data;
     };
 
@@ -1740,7 +1692,8 @@ this.Rocket.module("ArticlesApp", function(ArticlesApp, App, Backbone, Marionett
 
     Router.prototype.appRoutes = {
       'articles': 'list',
-      'articles/add': 'add'
+      'articles/add': 'add',
+      'articles/edit/:id': 'edit'
     };
 
     return Router;
@@ -1752,8 +1705,19 @@ this.Rocket.module("ArticlesApp", function(ArticlesApp, App, Backbone, Marionett
     },
     add: function() {
       return new ArticlesApp.New.Controller();
+    },
+    edit: function(id) {
+      return new ArticlesApp.Show.Controller({
+        id: id
+      });
     }
   };
+  App.vent.on('article:created article:updated', function(item) {
+    App.execute('alert:show:success', "Article \"" + (item.get('title')) + "\" was successfully saved!");
+    return App.navigate("articles/edit/" + item.id, {
+      trigger: true
+    });
+  });
   return App.addInitializer(function() {
     return new ArticlesApp.Router({
       controller: API
@@ -1794,10 +1758,30 @@ this.Rocket.module('ArticlesApp.List', function(List, App, Backbone, Marionette,
       return new List.Layout();
     };
 
-    Controller.prototype.getListView = function(articles) {
-      return new List.Pages({
-        collection: articles
+    Controller.prototype.getListView = function(collection) {
+      var list;
+      list = new List.Pages({
+        collection: collection
       });
+      list.on('childview:change:state', function(view, args) {
+        var page;
+        page = App.request('new:page:entity');
+        page.set(args.model.get('page'));
+        page.set('active', args.model.get('page').active === "0" ? "1" : "0");
+        args.model.get('page').active = page.get('active');
+        view.render();
+        return page.save();
+      });
+      this.listenTo(list, "childview:article:delete:clicked", function(child, args) {
+        var model;
+        model = args.model;
+        if (confirm("Artikel \"" + (model.get('title')) + "\" verwijderen?")) {
+          return model.destroy();
+        } else {
+          return false;
+        }
+      });
+      return list;
     };
 
     return Controller;
@@ -1834,7 +1818,26 @@ this.Rocket.module('ArticlesApp.List', function(List, App, Backbone, Marionette,
 
     PageItem.prototype.template = 'articles/list/templates/item';
 
-    PageItem.prototype.className = 'list-group-item';
+    PageItem.prototype.className = 'pageItem';
+
+    PageItem.prototype.ui = {
+      clickableState: '.js-pageItem-state',
+      state: '.pageItem-state',
+      destroy: '[data-action="destroy"]'
+    };
+
+    PageItem.prototype.triggers = {
+      'click @ui.clickableState': 'change:state',
+      "click @ui.destroy": "article:delete:clicked"
+    };
+
+    PageItem.prototype.modelEvents = {
+      "change": "render"
+    };
+
+    PageItem.prototype.onDomRefresh = function() {
+      return this.ui.state.tooltip();
+    };
 
     return PageItem;
 
@@ -1864,14 +1867,14 @@ this.Rocket.module('ArticlesApp.List', function(List, App, Backbone, Marionette,
 
     Pages.prototype.emptyView = List.Empty;
 
-    Pages.prototype.childViewContainer = '.treeview';
+    Pages.prototype.childViewContainer = '.pagesList';
 
     Pages.prototype.attributes = {
       id: 'articles-list'
     };
 
     Pages.prototype.ui = {
-      'items': '.list-group-item'
+      'items': '.pageItem'
     };
 
     return Pages;
@@ -1982,6 +1985,61 @@ this.Rocket.module('ArticlesApp.Settings', function(Settings, App, Backbone, Mar
     return Form;
 
   })(App.Views.BaseForm);
+});
+
+var __hasProp = {}.hasOwnProperty,
+  __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
+
+this.Rocket.module('ArticlesApp.Show', function(Show, App, Backbone, Marionette, $, _) {
+  return Show.Controller = (function(_super) {
+    __extends(Controller, _super);
+
+    function Controller() {
+      return Controller.__super__.constructor.apply(this, arguments);
+    }
+
+    Controller.prototype.initialize = function(options) {
+      var id, model;
+      model = options.model, id = options.id;
+      model || (model = App.request('article:entity', id));
+      this.listenTo(model, 'updated', (function(_this) {
+        return function() {
+          return App.vent.trigger('article:updated', model);
+        };
+      })(this));
+      this.view = this.getView({
+        model: model
+      });
+      return this.show(this.view, {
+        loading: {
+          entities: model
+        }
+      });
+    };
+
+    Controller.prototype.getView = function(options) {
+      return new Show.View(options);
+    };
+
+    return Controller;
+
+  })(App.Controllers.Base);
+});
+
+var __hasProp = {}.hasOwnProperty,
+  __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
+
+this.Rocket.module('ArticlesApp.Show', function(Show, App, Backbone, Marionette, $, _) {
+  return Show.View = (function(_super) {
+    __extends(View, _super);
+
+    function View() {
+      return View.__super__.constructor.apply(this, arguments);
+    }
+
+    return View;
+
+  })(App.Views.ArticleView);
 });
 
 this.Rocket.module("HeaderApp", function(HeaderApp, App, Backbone, Marionette, $, _) {
@@ -2110,8 +2168,7 @@ this.Rocket.module('Views', function(Views, App, Backbone, Marionette, $, _) {
       pages: '#page_id',
       template: '#template_id',
       submit: '[data-action="submit"],[type="submit"]',
-      destroy: '[data-action="destroy"]',
-      sirTrevor: '.js-st-instance',
+      editor: '.rocket-editor',
       inputSlug: '[name="slug"]',
       inputTitle: '[name="title"]',
       prefix: '.input-group-addon.prefix'
@@ -2123,10 +2180,6 @@ this.Rocket.module('Views', function(Views, App, Backbone, Marionette, $, _) {
       'blur @ui.inputTitle': 'showSlug',
       'keyup @ui.inputSlug': 'showSlug',
       'change @ui.pages': 'changePrefix'
-    };
-
-    PageView.prototype.triggers = {
-      'click @ui.destroy': 'page:delete:clicked'
     };
 
     PageView.prototype.showSlug = function() {
@@ -2151,16 +2204,19 @@ this.Rocket.module('Views', function(Views, App, Backbone, Marionette, $, _) {
         prefix = '&nbsp;&nbsp;&nbsp;&nbsp;'.repeat(model.get('level'));
         return "" + prefix + (model.get('title'));
       }, this.model.get('page_id'));
-      return this.sirTrevor = new SirTrevor.Editor({
-        el: this.ui.sirTrevor,
-        defaultType: 'Markdown',
-        blockTypes: ['Markdown', 'Heading', 'Image', 'Video']
+      return this.editor = new MediumEditor(this.ui.editor, {
+        buttons: ['bold', 'italic', 'underline', 'anchor', 'header1', 'header2', 'quote', 'unorderedlist']
       });
     };
 
+    PageView.prototype.onBeforeClose = function() {
+      return this.editor.deactivate();
+    };
+
     PageView.prototype.formatSaveData = function(data) {
-      SirTrevor.onBeforeSubmit();
-      data.body = this.sirTrevor.$el.val();
+      var body;
+      body = this.editor.serialize();
+      data.body = body['page-body']['value'];
       return data;
     };
 
@@ -2203,9 +2259,26 @@ this.Rocket.module('PagesApp.List', function(List, App, Backbone, Marionette, $,
     };
 
     Controller.prototype.getListView = function(pages) {
-      return new List.Pages({
+      var list;
+      list = new List.Pages({
         collection: pages
       });
+      list.on('childview:change:state', function(view, args) {
+        var model;
+        model = args.model;
+        model.set('active', model.get('active') === "0" ? "1" : "0");
+        return model.save();
+      });
+      this.listenTo(list, "childview:page:delete:clicked", function(child, args) {
+        var model;
+        model = args.model;
+        if (confirm("Pagina \"" + (model.get('title')) + "\" verwijderen?")) {
+          return model.destroy();
+        } else {
+          return false;
+        }
+      });
+      return list;
     };
 
     return Controller;
@@ -2227,7 +2300,7 @@ this.Rocket.module('PagesApp.List', function(List, App, Backbone, Marionette, $,
     Layout.prototype.template = 'pages/list/templates/layout';
 
     Layout.prototype.regions = {
-      listRegion: '#project-list'
+      listRegion: '.pages'
     };
 
     return Layout;
@@ -2240,9 +2313,50 @@ this.Rocket.module('PagesApp.List', function(List, App, Backbone, Marionette, $,
       return PageItem.__super__.constructor.apply(this, arguments);
     }
 
-    PageItem.prototype.template = 'pages/list/templates/item';
+    PageItem.prototype.getTemplate = function() {
+      if (this.model.get("editable") === "1") {
+        return 'pages/list/templates/item';
+      } else {
+        return 'pages/list/templates/item-disabled';
+      }
+    };
 
-    PageItem.prototype.className = 'list-group-item';
+
+    /**
+     * Returns attributes hash
+     *
+     * @return {Object}
+     */
+
+    PageItem.prototype.attributes = function() {
+      var attrs;
+      attrs = {
+        "class": 'pageItem'
+      };
+      if (this.model.get("editable") === "0") {
+        attrs["class"] = "pageItem pageItem-disabled";
+      }
+      return attrs;
+    };
+
+    PageItem.prototype.ui = {
+      clickableState: '.js-pageItem-state',
+      state: '.pageItem-state',
+      destroy: '[data-action="destroy"]'
+    };
+
+    PageItem.prototype.triggers = {
+      'click @ui.clickableState': 'change:state',
+      "click @ui.destroy": "page:delete:clicked"
+    };
+
+    PageItem.prototype.modelEvents = {
+      "change": "render"
+    };
+
+    PageItem.prototype.onDomRefresh = function() {
+      return this.ui.state.tooltip();
+    };
 
     return PageItem;
 
@@ -2272,14 +2386,14 @@ this.Rocket.module('PagesApp.List', function(List, App, Backbone, Marionette, $,
 
     Pages.prototype.emptyView = List.Empty;
 
-    Pages.prototype.childViewContainer = '.treeview';
+    Pages.prototype.childViewContainer = '.pagesList';
 
     Pages.prototype.attributes = {
       id: 'pages-list'
     };
 
     Pages.prototype.ui = {
-      'items': '.list-group-item'
+      'items': '.pageItem'
     };
 
     return Pages;
@@ -2389,8 +2503,10 @@ this.Rocket.module('PagesApp', function(PagesApp, App, Backbone, Marionette, $, 
     "delete": function(id, item) {}
   };
   App.vent.on('page:created page:updated', function(item) {
-    console.log(item);
-    return App.execute('alert:show:success', 'Great! page created');
+    App.execute('alert:show:success', "Page \"" + (item.get('title')) + "\" was successfully saved!");
+    return App.navigate("pages/edit/" + item.id, {
+      trigger: true
+    });
   });
   App.addInitializer(function() {
     return new PagesApp.Router({
@@ -2419,21 +2535,10 @@ this.Rocket.module('PagesApp.Show', function(Show, App, Backbone, Marionette, $,
       page || (page = App.request('page:entity', id));
       pages = App.request('page:entities');
       templates = App.request('template:entities');
-      this.listenTo(page, 'updated', (function(_this) {
-        return function() {
-          return App.vent.trigger('page:updated', page);
-        };
-      })(this));
-      this.view = this.getView(page, pages, templates);
-      this.listenTo(this.view, 'page:delete:clicked', function(args) {
-        var model;
-        model = args.model;
-        if (confirm("Pagina \"" + (model.get('title')) + "\" verwijderen?")) {
-          return model.destroy();
-        } else {
-          return false;
-        }
+      this.listenTo(page, "updated", function() {
+        return App.vent.trigger('page:updated', page);
       });
+      this.view = this.getView(page, pages, templates);
       return this.show(this.view, {
         loading: {
           entities: [page, pages, templates]

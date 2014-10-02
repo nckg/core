@@ -81,22 +81,16 @@ module.exports = (grunt) ->
       structure:
         src: [
           'assets/vendor/components/speakingurl/lib/index.js'
-          'assets/vendor/components/marked/lib/marked.js'
-          'assets/vendor/libraries/leptureeditor/editor.js'
           'assets/vendor/components/bootstrap/dist/js/bootstrap.js'
           'assets/vendor/components/html5shiv/dist/html5shiv.js'
           'assets/vendor/components/underscore/underscore.js'
-          'assets/vendor/components/Eventable/eventable.js'
           'assets/vendor/components/backbone/backbone.js'
           'assets/vendor/components/backbone.marionette/lib/backbone.marionette.js'
-          'assets/vendor/components/raphael/raphael.js'
-          'assets/vendor/components/morris.js/morris.js'
           'assets/vendor/components/js-md5/js/md5.js'
           'assets/vendor/components/momentjs/moment.js'
           'assets/vendor/components/parsleyjs/dist/parsley.js'
           'assets/vendor/components/backbone.syphon/lib/backbone.syphon.js'
-          'assets/vendor/components/sir-trevor-js/sir-trevor.js'
-          'assets/vendor/components/codemirror/lib/codemirror.js'
+          'assets/vendor/components/medium-editor/dist/js/medium-editor.min.js'
         ]
         dest: 'public/admin/js/structure.js'
 

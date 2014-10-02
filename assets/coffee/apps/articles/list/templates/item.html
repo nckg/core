@@ -1,1 +1,25 @@
-<h5><a href="#articles/edit/<%= id %>" class="list-group-item-heading"><%= title %></a></h5>
+<div class="pageItem-status">
+    <a href="#" class="pageItem-state js-pageItem-state" data-toggle="tooltip" data-placement="top" title="<%= ( page.active == '1' ) ? 'Gepubliceerd' : 'Verborgen' %>">
+        <% if ( page.active == '1' ) { %>
+        <i class="text-success fa fa-3x fa-check-circle"></i>
+        <% } else { %>
+        <i class="text-muted fa fa-3x fa-circle-o"></i>
+        <% } %>
+    </a>
+</div><!-- /.pageItem-state -->
+
+<div class="pageItem-meta">
+    <a href="#articles/edit/<%= id %>" class="pageItem-title"><%= title %></a>
+    <div class="pageItem-date">
+        <%= moment( created_at, Config.date_format ).fromNow() %>
+    </div>
+</div><!-- /.pageItem-meta -->
+
+<div class="pageItem-options">
+    <a class="pageItem-option" href="#articles/edit/<%= id %>">
+        <i class="fa fa-fw fa-2x fa-pencil"></i>
+    </a>
+    <a href="#" class="pageItem-option text-danger" data-action="destroy">
+        <i class="fa fa-fw fa-2x fa-trash-o"></i>
+    </a>
+</div><!-- /.pageItem-options -->

@@ -40,6 +40,11 @@ abstract class EloquentRepository
         return $this->model->where($column, $comparer, $value)->get();
     }
 
+    /**
+     * @param $id
+     * @return mixed
+     * @throws EntityNotFoundException
+     */
     public function requireById($id)
     {
         $model = $this->getById($id);
@@ -51,6 +56,10 @@ abstract class EloquentRepository
         return $model;
     }
 
+    /**
+     * @param Model $model
+     * @return Model
+     */
     public function save(Model $model)
     {
         if ($model->getDirty()) {
@@ -62,6 +71,10 @@ abstract class EloquentRepository
         return $model;
     }
 
+    /**
+     * @param $model
+     * @return mixed
+     */
     public function delete($model)
     {
         return $model->delete();

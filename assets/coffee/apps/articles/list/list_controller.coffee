@@ -17,6 +17,20 @@
         getLayout: ->
             new List.Layout()
 
-        getListView: ( articles ) ->
-            new List.Pages
-                collection: articles
+        getListView: ( collection ) ->
+            list = new List.Pages
+                collection: collection
+
+            list.on 'childview:change:state', ( view, args ) ->
+                page = App.request 'new:page:entity'
+                page.set args.model.get( 'page' )
+                page.set 'active', if args.model.get( 'page' ).active is "0" then "1" else "0"
+                args.model.get( 'page' ).active = page.get 'active'
+                view.render()
+                page.save()
+
+            @listenTo list, "childview:article:delete:clicked", (child, args) ->
+                model = args.model
+                if confirm "Artikel \"#{ model.get( 'title' ) }\" verwijderen?" then model.destroy() else false
+
+            list

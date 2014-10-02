@@ -75,6 +75,7 @@ class UpdatePageHandler implements Handler
         $page->slug = \Str::slug($request->title);
         $page->page_id = $request->pageId;
         $page->template_id = $request->templateId ? $request->templateId : 1;
+        $page->active = $request->active;
 
         $page = $this->update($page);
 

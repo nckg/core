@@ -31,6 +31,7 @@ class DeleteArticleHandler implements Handler
      */
     public function handle($request)
     {
+        $this->repository->delete($request->article->page);
         $this->repository->delete($request->article);
 
         return new DeleteArticleResponse($request->article);

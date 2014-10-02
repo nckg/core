@@ -7,10 +7,10 @@ class PostArticleResponse
     /**
      * @var \Rocket\Articles\Article
      */
-    public $page;
+    public $article;
 
-    public function __construct(Article $page)
+    public function __construct(Article $article)
     {
-        $this->page = $page;
+        $this->article = $article;
     }
 }

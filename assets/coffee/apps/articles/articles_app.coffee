@@ -7,7 +7,9 @@
         appRoutes:
             'articles': 'list'
             'articles/add': 'add'
-#            'articles/settings': 'settings'
+            'articles/edit/:id': 'edit'
+
+    #            'articles/settings': 'settings'
 
 #        onRoute: ( name, path, args ) ->
 #            super( name, path, args )
@@ -22,9 +24,18 @@
         add: ->
             new ArticlesApp.New.Controller()
 
+        edit: ( id ) ->
+            new ArticlesApp.Show.Controller
+                id: id
+
 #        settings: ->
 #            new ArticlesApp.Settings.Controller()
 
+
+    # Listen for the post created or saved then show alert and redirect.
+    App.vent.on 'article:created article:updated', ( item ) ->
+        App.execute 'alert:show:success', "Article \"#{ item.get( 'title' ) }\" was successfully saved!"
+        App.navigate "articles/edit/#{ item.id }", trigger: yes
 
     # Initialize the router.
     App.addInitializer ->

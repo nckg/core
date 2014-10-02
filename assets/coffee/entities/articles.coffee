@@ -4,8 +4,10 @@
     class Entities.Article extends App.Entities.Model
         defaults:
             id: null
-            body: ''
+            summary: ''
             title: ''
+            page:
+                body: ''
 
         urlRoot: ->
             App.request( 'get:url:api' ) + '/article'

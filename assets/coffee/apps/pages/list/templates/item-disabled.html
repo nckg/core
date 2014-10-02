@@ -1,0 +1,16 @@
+<div class="pageItem-status">
+    <span class="pageItem-state" data-toggle="tooltip" data-placement="top" title="<%= ( active == '1' ) ? 'Gepubliceerd' : 'Verborgen' %>">
+        <% if ( active == '1' ) { %>
+        <i class="text-success fa fa-3x fa-check-circle"></i>
+        <% } else { %>
+        <i class="text-muted fa fa-3x fa-circle-o"></i>
+        <% } %>
+    </span>
+</div><!-- /.pageItem-state -->
+
+<div class="pageItem-meta">
+    <span class="pageItem-title"><%= title %></span>
+    <div class="pageItem-slug">
+        /<%= path %>
+    </div>
+</div><!-- /.pageItem-meta -->

@@ -89,7 +89,10 @@ class Page extends Model implements PresenterInterface
         return null;
     }
 
-     public function article()
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function article()
      {
          return $this->hasOne('\Rocket\Articles\Article');
      }

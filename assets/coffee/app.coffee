@@ -62,9 +62,9 @@
     App.on 'start', ->
         @startHistory()
 
-        SirTrevor.setDefaults
-            # set image upload url
-            uploadUrl: App.request( 'get:url:api' ) + '/image'
+#        SirTrevor.setDefaults
+#            # set image upload url
+#            uploadUrl: App.request( 'get:url:api' ) + '/image'
 
 
 

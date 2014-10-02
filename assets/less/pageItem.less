@@ -1,0 +1,37 @@
+.pagesList {
+    .make-xs-column(12);
+}
+.pageItem {
+    .row;
+
+    border-top: 1px solid @gray-lighter;
+    padding: (@line-height-computed / 2) 0;
+}
+.pageItem:first-child {
+    border-top: none;
+}
+.pageItem-status {
+    .make-xs-column(1);
+}
+.pageItem-state {
+    display: inline-block;
+}
+.pageItem-meta {
+    .make-xs-column(10);
+}
+.pageItem-title {
+    font-size: @font-size-h5;
+}
+.pageItem-slug,
+.pageItem-date {
+    .text-muted;
+    font-size: @font-size-small;
+}
+.pageItem-options {
+    .make-md-column(1);
+    .text-right;
+}
+
+.pageItem-option {
+    display: inline-block;
+}
