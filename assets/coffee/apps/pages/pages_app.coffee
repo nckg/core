@@ -41,7 +41,8 @@
     # Listen for the post created or saved then show alert and redirect.
     App.vent.on 'page:created page:updated', ( item ) ->
         App.execute 'alert:show:success', "Page \"#{ item.get( 'title' ) }\" was successfully saved!"
-        App.navigate "pages/edit/#{ item.id }", trigger: yes
+        App.navigate "pages"
+        API.list()
 
     # # When the new post link is clicked then show the add routine.
     # App.vent.on 'post:new:clicked post:new', ->

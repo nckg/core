@@ -1,5 +1,6 @@
 <?php namespace Rocket\Controllers\Api;
 
+use Rocket\CommandBus\CommandBus;
 use Rocket\Settings\SettingRepository;
 
 class SettingsController extends BaseController
@@ -24,29 +25,8 @@ class SettingsController extends BaseController
      *
      * @return View
      */
-    public function getIndex()
+    public function index()
     {
         return $this->settings->getAll();
-    }
-
-    /**
-     * Stores the page
-     *
-     * @return Redirect
-     */
-    public function getByKey()
-    {
-        return $this->settings->findBy('key', '=', \Input::get('key'));
-    }
-
-    /**
-     * Save the page to the database.
-     *
-     * @param  integer $id
-     * @return Redirect
-     */
-    public function update($id)
-    {
-
     }
 }

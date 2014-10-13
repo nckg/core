@@ -34,7 +34,8 @@ Route::group(Config::get('routes.api_group_rules'), function() use ($apiNamespac
     Route::resource('article', $apiNamespace.'ArticlesController');
     Route::resource('image', $apiNamespace . 'ImageController');
     Route::resource('template', $apiNamespace.'TemplateController');
-//    Route::controller('setting', $apiNamespace.'SettingsController');
+    Route::resource('setting', $apiNamespace.'SettingsController');
+    Route::resource('user', $apiNamespace.'UserController');
 });
 
 
@@ -52,12 +53,15 @@ Route::group(Config::get('routes.admin_group_rules'), function()
     ))->where('slug', '^.*$');
 });
 
- Route::get('/', 'Rocket\Core\Controllers\FrontendController@index'); // Home page
+Route::get('/', 'Rocket\Core\Controllers\FrontendController@index'); // Home page
 
- // on a post
- Route::post('{slug}', array('uses' => 'Rocket\Core\Controllers\FrontendController@post'))
-     ->where('slug', '^((?!(admin|api)).)*$');
+// on a post
+Route::post('{slug}', array('uses' => 'Rocket\Core\Controllers\FrontendController@post'))
+    ->where('slug', '^((?!(admin|api)).)*$');
 
- // get all pages
- Route::get('{slug}', array('as' => 'page', 'uses' => 'Rocket\Core\Controllers\FrontendController@show'))
-     ->where('slug', '^((?!(admin|api)).)*$');
+App::before(function()
+{
+    // get all pages
+    Route::get('{slug}', array('as' => 'page', 'uses' => 'Rocket\Core\Controllers\FrontendController@show'))
+        ->where('slug', '^((?!(admin|api)).)*$');
+});

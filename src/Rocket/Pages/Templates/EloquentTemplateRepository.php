@@ -12,10 +12,15 @@ class EloquentTemplateRepository extends EloquentRepository implements TemplateR
     }
 
     /**
+     * @param bool $restricted
      * @return mixed
      */
-    public function getAll()
+    public function getAll($restricted = true)
     {
+        if ($restricted == false) {
+            return $this->model->all();
+        }
+
         return $this->model->where('editable', true)->get();
     }
 

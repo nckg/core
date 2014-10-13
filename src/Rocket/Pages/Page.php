@@ -13,6 +13,11 @@ class Page extends Model implements PresenterInterface
      */
     protected $table = 'pages';
 
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
     protected $fillable = array('title', 'body');
 
     protected $blocks;
@@ -71,22 +76,6 @@ class Page extends Model implements PresenterInterface
     public function children()
     {
         return $this->hasMany('\Rocket\Pages\Page', 'page_id');
-    }
-
-    /**
-     * Finds the first image of the block and returns it
-     *
-     * @return App\Services\Blocks\AbstractBlock
-     */
-    public function firstImage()
-    {
-        foreach ($this->blocks() as $block) {
-            if ($block->getType() === \App\Services\Blocks\Image::TYPE) {
-                return $block;
-            }
-        }
-
-        return null;
     }
 
     /**

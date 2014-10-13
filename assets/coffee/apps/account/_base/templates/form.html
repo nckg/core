@@ -1,0 +1,48 @@
+<form class="form" data-parsley-validate>
+    <div class="row">
+        <div class="header col-sm-12">
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label for="first_name">Voornaam</label>
+                        <input type="text" id="first_name" name="first_name" class="form-control input-lg" placeholder="Voornaam" value="<%= first_name %>" required="required">
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label for="last_name">Achternaam</label>
+                        <input type="text" id="last_name" name="last_name" class="form-control input-lg" placeholder="Achternaam" value="<%= last_name %>" required="required">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox" name="activated" value="1"<%= activated ? 'checked="checked"' : '' %>> Gebruiker is actief
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="form-group">
+                <label>E-mail</label>
+                <input type="email" class="form-control" id="email" name="email" value="<%= email %>">
+            </div>
+            <div class="form-group">
+                <label>Wachtwoord</label>
+                <input type="text" class="form-control" id="password" name="password">
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-12 text-right">
+            <button class="ui btn btn-link" type="reset">Annuleer en ga terug</button>
+            <button class="btn btn-success" type="submit"><i class="fa fa-check"></i> Opslaan</button>
+        </div>
+    </div>
+</form>

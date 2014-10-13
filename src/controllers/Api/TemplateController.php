@@ -5,7 +5,8 @@ use Rocket\Pages\Templates\TemplateRepository;
 use Rocket\Pages\Templates\UseCases\PostTemplateRequest;
 use Rocket\Pages\Templates\UseCases\UpdateTemplateRequest;
 
-class TemplateController extends BaseController {
+class TemplateController extends BaseController
+{
 
     /**
      *
@@ -32,7 +33,7 @@ class TemplateController extends BaseController {
      */
     public function index()
     {
-        return $this->templates->getAll();
+        return $this->templates->getAll(\Input::get('restricted', "true") == "true" ? true : false);
     }
 
     public function show($id)
@@ -55,7 +56,7 @@ class TemplateController extends BaseController {
 
         $response = $this->bus->execute($request);
 
-        return \Redirect::action('Rocket\Controllers\Api\TemplateController@show', [$response->template->id]);
+        return \Redirect::action('Rocket\Controllers\Api\TemplateController@show', array($response->template->id));
     }
 
     /**

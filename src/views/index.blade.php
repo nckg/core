@@ -21,6 +21,7 @@
 
             Rocket.start({
                 user: {{ $user }},
+                users: {{ $users }},
                 api_url: "{{ route('api.index') }}",
                 settings: {}
             });

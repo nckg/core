@@ -1,8 +1,11 @@
 <?php namespace Rocket\Core\Controllers;
 
+use Rocket\Forms\Form;
+use Rocket\Forms\FormData;
 use Rocket\Pages\PageRepository;
 
-class FrontendController extends BaseController {
+class FrontendController extends BaseController
+{
 
     /**
      *
@@ -23,14 +26,12 @@ class FrontendController extends BaseController {
     private function findPage($slug)
     {
         // find page
-        $page = $this->pages->getBy('slug', '=', $slug)->first();
+        $page = $this->pages->getActiveBySlug($slug);
 
         // there wasn't a page found, maybe it's a module or something
         // like that? We will search the database for that.
         // We'll work our way back from the full slug
         if ( ! $page) {
-            // $slugs = explode('/', $slug);
-
             \App::abort(404, 'Page not found');
         }
 
@@ -58,9 +59,9 @@ class FrontendController extends BaseController {
         // find page
         $page = $this->findPage($slug);
 
-        return \View::make($page->template->template, [
+        return \View::make($page->template->template, array(
             'page' => $page,
-        ]);
+        ));
     }
 
     /**
@@ -75,17 +76,11 @@ class FrontendController extends BaseController {
         $page = $this->findPage($slug);
 
         // check if page has form
-        $hasForm = false;
-
-        foreach ($page->blocks() as $block) {
-            if ($block->getType() === 'form') {
-                $hasForm = $block;
-            }
-        }
+        $form = Form::findOrFail(\Input::get('form_id'));
 
         // return to the page if there was a post but not form was detected
-        if (!$hasForm) {
-            \Redirect::to($lug);
+        if ( ! $form) {
+            \Redirect::to($slug);
         }
 
         // find values and save them
@@ -94,7 +89,7 @@ class FrontendController extends BaseController {
 
         // loop each elemand and add to $formData
         // and create the validation rules
-        foreach ($hasForm->getFields() as $element) {
+        foreach ($form->fields as $element) {
             $key = \Str::slug($element['label']);
 
             // add to rules, if any
@@ -117,27 +112,34 @@ class FrontendController extends BaseController {
         // validate form
         $validator = \Validator::make(\Input::all(), $rules);
         if ($validator->fails()) {
-            return \Redirect::to($slug)
+            return \Redirect::to($slug . '#form-' . $form->id)
                 ->withInput()
                 ->withErrors($validator);
         }
 
+        // save data
+        $dataModel = new FormData;
+        $dataModel->data = json_encode($formData);
+
+        $form->formData()->save($dataModel);
+
         // dat e-mail
-        $settings = $hasForm->getSettings();
         $emailData = array(
             'formData' => $formData,
-            'subject' => $settings['subject']
+            'subject' => $form->title
         );
 
-        \Mail::send('site::emails.form', $emailData, function($message) use ($settings)
+        \Mail::send('emails.form', $emailData, function($message) use ($form)
         {
             // add first email address als
-            $to = array_shift($settings['mail']);
+            $message->from('info@arendonkzingt.be', 'Arendonk Zingt & Swingt');
+            $emails = explode(';', $form->email_to);
+            $to = array_shift($emails);
             $message->to($to);
 
             // loop through each mail
-            if (!empty($settings['mail'])) {
-                foreach ($settings['mail'] as $email) {
+            if ( ! empty($emails)) {
+                foreach ($emails as $email) {
                     $message->cc($email);
                 }
             }
@@ -145,13 +147,11 @@ class FrontendController extends BaseController {
             // add subject
             // TODO: put this into a config settings
             $subject = 'Ingevuld formulier op %s: %s';
-            $message->subject(sprintf($subject, \Config::get('app.url'), $settings['subject']));
+            $message->subject(sprintf($subject, \Config::get('app.url'), $form->title));
         });
 
-        // return page
-        \Notification::success($settings['on_success']);
-
-        return \View::make($page->type->template)
-            ->with('page', $page);
+        return \Redirect::to($page->path . '#form-' . $form->id)
+            ->withInput()
+            ->with('success', $form->success);
     }
 }

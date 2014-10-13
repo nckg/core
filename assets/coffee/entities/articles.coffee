@@ -6,8 +6,12 @@
             id: null
             summary: ''
             title: ''
+            user: null
+            publish_at: null
             page:
                 body: ''
+            image_id: null
+            image: null
 
         urlRoot: ->
             App.request( 'get:url:api' ) + '/article'

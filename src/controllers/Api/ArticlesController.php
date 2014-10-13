@@ -1,10 +1,12 @@
 <?php namespace Rocket\Controllers\Api;
 
+use Carbon\Carbon;
 use Rocket\Articles\ArticleRepository;
 use Rocket\Articles\UseCases\DeleteArticleRequest;
 use Rocket\Articles\UseCases\PostArticleRequest;
 use Rocket\Articles\UseCases\UpdateArticleRequest;
 use Rocket\CommandBus\CommandBus;
+use Rocket\Settings\Setting;
 
 class ArticlesController extends BaseController {
     /**
@@ -59,13 +61,15 @@ class ArticlesController extends BaseController {
             \Input::get('title'),
             \Input::get('summary'),
             \Input::get('body'),
-            4,
-            5
+            Setting::where('key', 'blog.item.template')->first()->value,
+            Setting::where('key', 'blog.page_id')->first()->value,
+            \Input::get('image_id'),
+            \Input::get('publish_at') ? Carbon::createFromFormat('Y-m-d H:i', \Input::get('publish_at')) : null
         );
 
         $response = $this->bus->execute($request);
 
-        return \Redirect::route('api.article.show', [$response->article->id]);
+        return \Redirect::route('api.article.show', array($response->article->id));
     }
 
     /**
@@ -81,7 +85,9 @@ class ArticlesController extends BaseController {
             \Sentry::getUser(),
             \Input::get('title'),
             \Input::get('body'),
-            \Input::get('summary')
+            \Input::get('summary'),
+            \Input::get('image_id'),
+            \Input::get('publish_at') ? Carbon::createFromFormat('Y-m-d H:i', \Input::get('publish_at')) : null
         );
 
         $response = $this->bus->execute($request);

@@ -76,6 +76,7 @@ class UpdatePageHandler implements Handler
         $page->page_id = $request->pageId;
         $page->template_id = $request->templateId ? $request->templateId : 1;
         $page->active = $request->active;
+        $page->publish_at = $request->publishAt;
 
         $page = $this->update($page);
 

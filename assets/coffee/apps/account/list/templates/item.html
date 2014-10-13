@@ -1,0 +1,34 @@
+<div class="pageItem-status">
+    <a href="#" class="pageItem-state js-pageItem-state" data-toggle="tooltip" data-placement="top" title="<%= ( activated ) ? 'Actief' : 'Inactief' %>">
+        <% if ( activated ) { %>
+        <i class="text-success fa fa-3x fa-check-circle"></i>
+        <% } else { %>
+        <i class="text-muted fa fa-3x fa-circle-o"></i>
+        <% } %>
+    </a>
+</div><!-- /.pageItem-state -->
+
+<div class="pageItem-meta">
+    <div class="media">
+        <div class="pull-left">
+            <img class="media-object img-circle pull-left" src="<%= gravatar( email, 80 ) %>" width="40" height="40">
+        </div>
+        <div class="media-body">
+            <a href="#accounts/edit/<%= id %>" class="pageItem-title" data-action="edit"><%= first_name %> <%= last_name %></a>
+            <div class="pageItem-date">
+                Laatste login: <%= last_login ? moment( last_login, Config.date_format ).fromNow() : 'Nooit' %>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="pageItem-options">
+    <a class="pageItem-option" href="#accounts/edit/<%= id %>" data-action="edit">
+        <i class="fa fa-fw fa-2x fa-pencil"></i>
+    </a>
+    <% if (canDelete()) { %>
+    <a href="#" class="pageItem-option text-danger" data-action="destroy">
+        <i class="fa fa-fw fa-2x fa-trash-o"></i>
+    </a>
+    <% } %>
+</div><!-- /.pageItem-options -->

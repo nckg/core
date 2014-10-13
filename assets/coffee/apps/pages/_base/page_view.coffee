@@ -50,6 +50,15 @@
             @editor = new MediumEditor @ui.editor,
                 buttons: [ 'bold', 'italic', 'underline', 'anchor', 'header1', 'header2', 'quote', 'unorderedlist' ]
 
+            # insert
+            @ui.editor.mediumInsert
+                editor: @editor
+                addons:
+                    forms: {}
+                    embeds:
+                        oembedProxy: 'http://medium.iframe.ly/api/oembed?iframe=1'
+
+
         onBeforeClose: ->
             @editor.deactivate()
 
@@ -57,10 +66,9 @@
         # It could be setting a particular date format or setting the
         # correct case on strings, for example.
         formatSaveData: ( data ) ->
-#            SirTrevor.onBeforeSubmit()
-
             # get data from sir Trevor
             body = @editor.serialize()
+            console.log( body )
             data.body = body[ 'page-body' ][ 'value' ]
 
             data

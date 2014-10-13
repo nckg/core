@@ -1,7 +1,23 @@
 .rocket-editor {
+    .form-control;
     outline: none;
     min-height: 38px;
+    height: auto;
     margin: 0 0 20px 0;
-    padding: 0 0 20px 0;
-    border-bottom: 1px solid rgb(219, 219, 219);
+    padding: 0 @line-height-computed @line-height-computed @line-height-computed;
+}
+.rocket-editor.medium-editor-placeholder:after {
+    top: @line-height-computed;
+    left: @line-height-computed;
+    .text-muted;
+}
+.mediumInsert {
+    margin-left: 0px !important;
+    min-height: 18px;
+}
+.mediumInsert .mediumInsert-buttons {
+    left: 50%;
+    transform: translate(-50%, 0%);
+    -webkit-transform: translate(-50%, 0%);
+    margin-left: 0;
 }

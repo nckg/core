@@ -35,7 +35,8 @@
     # Listen for the post created or saved then show alert and redirect.
     App.vent.on 'article:created article:updated', ( item ) ->
         App.execute 'alert:show:success', "Article \"#{ item.get( 'title' ) }\" was successfully saved!"
-        App.navigate "articles/edit/#{ item.id }", trigger: yes
+        App.navigate "articles"
+        API.list()
 
     # Initialize the router.
     App.addInitializer ->

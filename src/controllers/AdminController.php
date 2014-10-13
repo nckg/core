@@ -1,16 +1,30 @@
 <?php namespace Rocket\Core\Controllers;
 
-use Rocket\Settings\Setting;
+use Rocket\Accounts\UserRepository;
 
 class AdminController extends BaseController
 {
+    /**
+     * @var UserRepository
+     */
+    private $users;
+
+    /**
+     * @param UserRepository $users
+     */
+    public function __construct(UserRepository $users)
+    {
+        $this->users = $users;
+    }
+
     /**
      * Get the main admin view.
      */
     public function index()
     {
         return \View::make('core::index')
-            ->with('user', \Sentry::getUser());
+            ->with('user', \Sentry::getUser())
+            ->with('users', $this->users->getAll());
     }
 
     /**

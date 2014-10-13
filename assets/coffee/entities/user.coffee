@@ -1,6 +1,14 @@
 @Rocket.module "Entities", (Entities, App, Backbone, Marionette, $, _) ->
 
     class Entities.User extends App.Entities.Model
+        defaults:
+            first_name: ''
+            last_name: ''
+            email: ''
+            password: ''
+            activated: true
+            last_login: null
+
         urlRoot: ->
             App.request("get:url:api") + "/user"
 

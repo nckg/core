@@ -1,33 +1,28 @@
-<?php namespace Rocket\Core\Controllers\Api;
+<?php namespace Rocket\Controllers\Api;
 
-use App\Services\Storage\Media\MediaRepositoryInterface as Media;
+use Rocket\CommandBus\CommandBus;
+use Rocket\Media\MediaRepository;
+use Rocket\Media\Upload;
+use Rocket\Media\UseCases\CreateMediaRequest;
 
-class ImageController extends BaseController {
+class ImageController extends BaseController
+{
 
     /**
-     *
      * @var MediaRepository
      */
-    protected $media;
+    private $repository;
 
     /**
      * Default constructor
      *
-     * @param Media     $media
+     * @param MediaRepository $repository
+     * @param CommandBus $bus
      */
-    public function __construct(Media $media)
+    public function __construct(MediaRepository $repository, CommandBus $bus)
     {
-        $this->media = $media;
-    }
-
-    /**
-     * Show the index page
-     *
-     * @return View
-     */
-    public function index()
-    {
-        return $this->media->all();
+        $this->repository = $repository;
+        $this->bus = $bus;
     }
 
     /**
@@ -42,18 +37,19 @@ class ImageController extends BaseController {
         // - attachments[file] – the file as Symfony\Component\HttpFoundation\File\UploadedFile
         // - attachments[uid] – a unique identifier for this file
         try {
-            if (\Input::hasFile('attachment.file')) {
-                $file = \Upload::upload(\Input::file('attachment.file'));
+            if (\Input::hasFile('file')) {
+                $file = Upload::upload(\Input::file('file'), \Config::get('upload.basedir'));
 
-                $media = $this->media->create(array(
-                    'name' => $file->getFilename(),
-                    // /var/www/public/upload/
-                    'public_path' => str_replace(public_path(), '', $file->getPath()),
-                    'real_path' => $file->getPath(),
-                    'mime' => $file->getMimeType(),
-                ));
+                $request = new CreateMediaRequest(
+                    $file->getFilename(),
+                    str_replace(public_path(), '', $file->getPath()),
+                    $file->getPath(),
+                    $file->getMimeType()
+                );
 
-                return $media;
+                $response = $this->bus->execute($request);
+
+                return $response->media;
             } else {
                 throw new \Exception('No file found', 1);
             }

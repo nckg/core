@@ -91,6 +91,9 @@ module.exports = (grunt) ->
           'assets/vendor/components/parsleyjs/dist/parsley.js'
           'assets/vendor/components/backbone.syphon/lib/backbone.syphon.js'
           'assets/vendor/components/medium-editor/dist/js/medium-editor.min.js'
+          'assets/vendor/components/medium-editor-insert-plugin/dist/js/medium-editor-insert-plugin.all.js'
+          'assets/vendor/components/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js'
+          'assets/vendor/components/dropzone/downloads/dropzone.js'
         ]
         dest: 'public/admin/js/structure.js'
 

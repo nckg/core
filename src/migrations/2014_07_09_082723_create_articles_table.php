@@ -30,8 +30,10 @@ class CreateArticlesTable extends Migration {
             $table->increments('id');
             $table->string('title');
             $table->text('summary');
-            $table->integer('page_id')->nullable();
+            $table->integer('page_id');
+            $table->integer('image_id')->nullable();
             $table->integer('user_id');
+            $table->timestamp('publish_at')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

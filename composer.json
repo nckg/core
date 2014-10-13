@@ -6,12 +6,11 @@
         "mccool/laravel-auto-presenter": "2.*",
         "illuminate/support": "4.2.*",
         "cartalyst/sentry": "2.1.*",
-        "michelf/php-markdown": "1.4.*",
         "imagine/Imagine": "v0.5.0",
-        "way/generators": "2.*",
         "codeguy/upload": "1.*"
     },
     "require-dev": {
+        "way/generators": "2.*",
         "mockery/mockery": "0.9.0",
         "phpunit/phpunit": "4.1.*",
         "way/laravel-test-helpers": "dev-master",

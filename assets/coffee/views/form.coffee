@@ -54,6 +54,7 @@
         # server.
         getSaveData: ->
             data = Backbone.Syphon.serialize(this)
+
             @formatSaveData data
 
         # Default save method called in 'edit' and 'new' type

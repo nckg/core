@@ -7,7 +7,12 @@
 
     class List.PageItem extends App.Views.ItemView
         template: 'articles/list/templates/item'
-        className: 'pageItem'
+
+        attributes: ->
+            if String( @model.get( "page" ).active ) is "1" and @model.get( "publish_at" ) > moment().format('YYYY-MM-DD HH:mm:ss')
+                class: "pageItem pageItem--scheduled"
+            else
+                class: "pageItem pageItem--published"
 
         ui:
             clickableState: '.js-pageItem-state'
@@ -20,6 +25,23 @@
 
         modelEvents:
             "change": "render"
+
+        templateHelpers: ->
+            status: ->
+                if String( @page.active ) is "1" and @publish_at > moment().format('YYYY-MM-DD HH:mm:ss')
+                    return 'scheduled'
+                else if String( @page.active ) is "1"
+                    return 'active'
+
+                return 'inactive'
+
+            statusText: ->
+                if String( @page.active ) is "1" and @publish_at > moment().format('YYYY-MM-DD HH:mm:ss')
+                    return 'Actief vanaf: ' + moment( @publish_at ).format('DD-MM-YYYY HH:mm')
+                else if String( @page.active ) is "1"
+                    return 'Actief'
+
+                return 'Inactief'
 
         onDomRefresh: ->
             @ui.state.tooltip()

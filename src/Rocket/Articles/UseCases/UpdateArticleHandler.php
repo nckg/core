@@ -45,9 +45,10 @@ class UpdateArticleHandler implements Handler
             $request->user,
             $request->title,
             $request->body,
-            $request->article->page->pageId,
-            $request->article->page->templateId,
-            true
+            $request->article->page->page_id,
+            $request->article->page->template_id,
+            true,
+            $request->publishAt
         );
 
         // create a new page for it
@@ -57,6 +58,8 @@ class UpdateArticleHandler implements Handler
         $article->user_id = $request->user->id;
         $article->title = $request->title;
         $article->summary = $request->summary;
+        $article->publish_at = $request->publishAt;
+        $article->image_id = $request->imageId;
 
         $this->articles->save($article);
 

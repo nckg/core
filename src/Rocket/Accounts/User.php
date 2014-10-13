@@ -23,7 +23,33 @@ class User extends SentryUser implements UserInterface, RemindableInterface {
      *
      * @var array
      */
-    protected $hidden = array('password');
+    protected $hidden = array('password', 'activation_code');
+
+    /**
+     * @param $firstName
+     * @param $lastName
+     * @param $email
+     * @param $password
+     * @param bool $activated
+     * @return static
+     */
+    public static function register($firstName, $lastName, $email, $password, $activated = true)
+    {
+        self::unguard();
+
+        $user = new static(array(
+            'first_name' => $firstName,
+            'last_name' => $lastName,
+            'email' => $email,
+            'activated' => $activated,
+        ));
+
+        $user->setHasher(new \Cartalyst\Sentry\Hashing\NativeHasher);
+
+        $user->password = $password;
+
+        return $user;
+    }
 
     /**
      * Get the unique identifier for the user.

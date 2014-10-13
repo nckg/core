@@ -1,5 +1,6 @@
 <?php namespace Rocket\Articles;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
 use McCool\LaravelAutoPresenter\PresenterInterface;
@@ -25,7 +26,7 @@ class Article extends Model implements PresenterInterface
 
     public function getPresenter()
     {
-        return 'Rocket\Pages\ArticlePresenter';
+        return 'Rocket\Articles\ArticlePresenter';
     }
 
     /**
@@ -37,38 +38,41 @@ class Article extends Model implements PresenterInterface
     }
 
     /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function user()
+    {
+        return $this->belongsTo('\Rocket\Accounts\User');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function image()
+    {
+        return $this->belongsTo('\Rocket\Media\Media');
+    }
+
+    /**
      * @param User $user
      * @param $title
      * @param $summary
      * @param $pageId
+     * @param null $imageId
+     * @param Carbon $publishAt
      * @return static
      */
-    public static function register(User $user, $title, $summary, $pageId)
+    public static function register(User $user, $title, $summary, $pageId, $imageId = null, Carbon $publishAt = null)
     {
         self::unguard();
 
-        return new static([
+        return new static(array(
             'user_id' => $user->id,
             'title' => $title,
             'summary' => $summary,
             'page_id' => $pageId,
-        ]);
-    }
-
-
-    /**
-     * Finds the first image of the block and returns it
-     *
-     * @return App\Services\Blocks\AbstractBlock
-     */
-    public function firstImage()
-    {
-        foreach ($this->blocks() as $block) {
-            if ($block->getType() === \App\Services\Blocks\Image::TYPE) {
-                return $block;
-            }
-        }
-
-        return null;
+            'image_id' => $imageId,
+            'publish_at' => $publishAt,
+        ));
     }
 }

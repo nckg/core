@@ -1,5 +1,6 @@
 <?php namespace Rocket\Pages\UseCases;
 
+use Carbon\Carbon;
 use Rocket\Accounts\User;
 use Rocket\Pages\Page;
 
@@ -12,9 +13,20 @@ class UpdatePageRequest
     public $pageId;
     public $templateId;
     public $active;
+    public $publishAt;
 
 
-    public function __construct(Page $page, User $user, $title, $body, $pageId, $templateId, $active)
+    /**
+     * @param Page $page
+     * @param User $user
+     * @param $title
+     * @param $body
+     * @param $pageId
+     * @param $templateId
+     * @param $active
+     * @param Carbon $publishAt
+     */
+    public function __construct(Page $page, User $user, $title, $body, $pageId, $templateId, $active = true, Carbon $publishAt = null)
     {
         $this->page = $page;
         $this->user = $user;
@@ -23,5 +35,6 @@ class UpdatePageRequest
         $this->pageId = $pageId;
         $this->templateId = $templateId;
         $this->active = $active;
+        $this->publishAt = $publishAt;
     }
 }

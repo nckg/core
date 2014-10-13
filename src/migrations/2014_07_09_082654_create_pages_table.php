@@ -42,6 +42,7 @@ class CreatePagesTable extends Migration {
             $table->string('path');
             $table->text('body');
             $table->string('data');
+            $table->timestamp('publish_at')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

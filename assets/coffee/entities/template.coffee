@@ -15,10 +15,11 @@
             App.request( 'get:url:api' ) + '/template'
 
     API =
-        getAll: ->
+        getAll: ( options ) ->
             template = new Entities.TemplateCollection
             template.fetch
                 reset: true
+                data: options
             template
 
         getTemplate: (id) ->
@@ -30,8 +31,8 @@
         newTemplate: ->
             new Entities.Template
 
-    App.reqres.setHandler 'template:entities', ->
-        API.getAll()
+    App.reqres.setHandler 'template:entities', ( options ) ->
+        API.getAll( options )
 
     App.reqres.setHandler 'template:entity', (id) ->
         API.getTemplate id

@@ -1,5 +1,6 @@
 <?php namespace Rocket\Articles\UseCases;
 
+use Carbon\Carbon;
 use Rocket\Accounts\User;
 use Rocket\Articles\Article;
 
@@ -16,6 +17,8 @@ class UpdateArticleRequest
     public $title;
     public $body;
     public $summary;
+    public $publishAt;
+    public $imageId;
 
     /**
      * @param Article $article
@@ -24,12 +27,14 @@ class UpdateArticleRequest
      * @param $body
      * @param $summary
      */
-    public function __construct(Article $article, User $user, $title, $body, $summary)
+    public function __construct(Article $article, User $user, $title, $body, $summary, $imageId = null, Carbon $publishAt = null)
     {
         $this->article = $article;
         $this->user = $user;
         $this->title = $title;
         $this->body = $body;
         $this->summary = $summary;
+        $this->publishAt = $publishAt;
+        $this->imageId = $imageId;
     }
 }

@@ -3,7 +3,14 @@
 @section('content')
 
     {{ Form::open(array('class' => 'form-signin')) }}
-    {{-- Form elements --}}
+        <h1 class="text-center">
+            <span class="fa-stack fa-lg">
+              <i class="fa fa-circle fa-stack-2x"></i>
+              <i class="fa fa-rocket fa-stack-1x fa-inverse"></i>
+            </span>
+        </h1>
+
+        {{-- Form elements --}}
         {{ Form::text('email', null, array('class' => 'form-control', 'placeholder' => 'E-mail', 'autofocus' => '')) }}
         {{ Form::password('password', array('class' => 'form-control', 'placeholder' => 'Wachtwoord')) }}
         {{ Form::submit('Aanmelden', array('class' => 'btn btn-lg btn-primary btn-block')) }}

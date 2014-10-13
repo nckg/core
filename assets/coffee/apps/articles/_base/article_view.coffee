@@ -12,6 +12,7 @@
             form: 'form'
             submit: '[data-action="submit"],[type="submit"]'
             editor: '.rocket-editor'
+            publishAt: '[name="publish_at"]'
 
         events:
             'click @ui.submit' : 'save'
@@ -19,12 +20,29 @@
         # manipulate the `el` here. it's already
         # been rendered, and is full of the view's
         # HTML, ready to go.
-        onRender: ->
-            console.log @model
+        onShow: ->
+            @publishAt = @ui.publishAt.datetimepicker
+                format: 'YYYY-MM-DD HH:mm'
+                icons:
+                    time: "fa fa-clock-o"
+                    date: "fa fa-calendar"
+                    up: "fa fa-arrow-up"
+                    down: "fa fa-arrow-down"
+
             @editor = new MediumEditor @ui.editor
+
+            @ui.editor.mediumInsert
+                editor: @editor
+                addons:
+                    forms: {}
+                    embeds:
+                        oembedProxy: 'http://medium.iframe.ly/api/oembed?iframe=1'
+
+            App.vent.trigger "setup:dropzone", "#dropzone-attachment", @model.get( "image" )
 
         onBeforeClose: ->
             @editor.deactivate()
+            @publishAt.destroy()
 
         # override in child to format save data in a particular way.
         # It could be setting a particular date format or setting the
@@ -32,6 +50,6 @@
         formatSaveData: ( data ) ->
             # get data from sir Trevor
             body = @editor.serialize()
-            data.body = body[ 'page-body' ][ 'value' ]
+            data['body'] = body[ 'page-body' ][ 'value' ]
 
             data

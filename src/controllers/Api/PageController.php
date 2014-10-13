@@ -19,6 +19,7 @@ class PageController extends BaseController {
      * Default constructor
      *
      * @param PageRepository $pages
+     * @param CommandBus $bus
      */
     public function __construct(PageRepository $pages, CommandBus $bus)
     {
@@ -62,7 +63,7 @@ class PageController extends BaseController {
 
         $response = $this->bus->execute($request);
 
-        return \Redirect::action('Rocket\Controllers\Api\PageController@show', [$response->page->id]);
+        return \Redirect::action('Rocket\Controllers\Api\PageController@show', array($response->page->id));
     }
 
     /**

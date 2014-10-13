@@ -36,6 +36,7 @@ class PostPageHandler implements Handler
         $page->page_id = $request->pageId;
         $page->template_id = $request->templateId ? $request->templateId : 1;
         $page->editable = $request->editable;
+        $page->publish_at = $request->publishAt;
 
         // We're going to try and get the parent slug if the input has a
         // 'page_id' identifier. There is no need to go all the way up the

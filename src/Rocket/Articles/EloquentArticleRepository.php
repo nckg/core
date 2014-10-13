@@ -1,5 +1,6 @@
 <?php namespace Rocket\Articles;
 
+use Carbon\Carbon;
 use Illuminate\Support\Collection;
 use Rocket\Core\EloquentRepository;
 use Rocket\Core\Exceptions\EntityNotFoundException;
@@ -19,7 +20,7 @@ class EloquentArticleRepository extends EloquentRepository implements ArticleRep
      */
     public function getAll()
     {
-        return $this->model->with(['page'])
+        return $this->model->with(array('page', 'user'))
             ->orderBy('created_at', 'desc')
             ->get();
     }
@@ -32,7 +33,7 @@ class EloquentArticleRepository extends EloquentRepository implements ArticleRep
     public function requireById($id)
     {
         $model = $this->model->where('id', $id)
-            ->with(['page'])
+            ->with(array('page', 'user', 'image'))
             ->first();
 
         if ( ! $model) {
@@ -43,6 +44,22 @@ class EloquentArticleRepository extends EloquentRepository implements ArticleRep
 
     }
 
+    /**
+     * @param int $limit
+     * @return mixed
+     */
+    public function getPublishable($limit = 10)
+    {
+        return $this->model->with('user', 'image', 'page')
+            ->whereHas('page', function($query) {
+                $query->where('active', 1);
+            })
+            ->whereRaw('(publish_at <= ? OR publish_at IS NULL)', array(Carbon::now()))
+            ->orderBy('created_at', 'desc')
+            ->take($limit)
+            ->get();
+        dd(\DB::getQueryLog());
+    }
 
     /**
      * @param int $limit
@@ -50,7 +67,7 @@ class EloquentArticleRepository extends EloquentRepository implements ArticleRep
      */
     public function getLatest($limit = 10)
     {
-        return $this->model->with(array('page', 'user'))
+        return $this->model->with(array('page', 'user', 'image'))
             ->orderBy('created_at', 'desc')
             ->take($limit)
             ->get();

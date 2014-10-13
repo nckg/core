@@ -1,5 +1,78 @@
 this["JST"] = this["JST"] || {};
 
+this["JST"]["account/_base/templates/form.html"] = function(obj) {
+obj || (obj = {});
+var __t, __p = '', __e = _.escape;
+with (obj) {
+__p += '<form class="form" data-parsley-validate>\n    <div class="row">\n        <div class="header col-sm-12">\n            <div class="row">\n                <div class="col-sm-6">\n                    <div class="form-group">\n                        <label for="first_name">Voornaam</label>\n                        <input type="text" id="first_name" name="first_name" class="form-control input-lg" placeholder="Voornaam" value="' +
+((__t = ( first_name )) == null ? '' : __t) +
+'" required="required">\n                    </div>\n                </div>\n                <div class="col-sm-6">\n                    <div class="form-group">\n                        <label for="last_name">Achternaam</label>\n                        <input type="text" id="last_name" name="last_name" class="form-control input-lg" placeholder="Achternaam" value="' +
+((__t = ( last_name )) == null ? '' : __t) +
+'" required="required">\n                    </div>\n                </div>\n            </div>\n            <div class="row">\n                <div class="col-sm-6">\n                    <div class="checkbox">\n                        <label>\n                            <input type="checkbox" name="activated" value="1"' +
+((__t = ( activated ? 'checked="checked"' : '' )) == null ? '' : __t) +
+'> Gebruiker is actief\n                        </label>\n                    </div>\n                </div>\n            </div>\n        </div>\n    </div>\n    <div class="row">\n        <div class="col-sm-12">\n            <div class="form-group">\n                <label>E-mail</label>\n                <input type="email" class="form-control" id="email" name="email" value="' +
+((__t = ( email )) == null ? '' : __t) +
+'">\n            </div>\n            <div class="form-group">\n                <label>Wachtwoord</label>\n                <input type="text" class="form-control" id="password" name="password">\n            </div>\n        </div>\n    </div>\n\n    <div class="row">\n        <div class="col-sm-12 text-right">\n            <button class="ui btn btn-link" type="reset">Annuleer en ga terug</button>\n            <button class="btn btn-success" type="submit"><i class="fa fa-check"></i> Opslaan</button>\n        </div>\n    </div>\n</form>';
+
+}
+return __p
+};
+
+this["JST"]["account/list/templates/grid.html"] = function(obj) {
+obj || (obj = {});
+var __t, __p = '', __e = _.escape;
+with (obj) {
+__p += '<div class="pagesList"></div>';
+
+}
+return __p
+};
+
+this["JST"]["account/list/templates/item.html"] = function(obj) {
+obj || (obj = {});
+var __t, __p = '', __e = _.escape, __j = Array.prototype.join;
+function print() { __p += __j.call(arguments, '') }
+with (obj) {
+__p += '<div class="pageItem-status">\n    <a href="#" class="pageItem-state js-pageItem-state" data-toggle="tooltip" data-placement="top" title="' +
+((__t = ( ( activated ) ? 'Actief' : 'Inactief' )) == null ? '' : __t) +
+'">\n        ';
+ if ( activated ) { ;
+__p += '\n        <i class="text-success fa fa-3x fa-check-circle"></i>\n        ';
+ } else { ;
+__p += '\n        <i class="text-muted fa fa-3x fa-circle-o"></i>\n        ';
+ } ;
+__p += '\n    </a>\n</div><!-- /.pageItem-state -->\n\n<div class="pageItem-meta">\n    <div class="media">\n        <div class="pull-left">\n            <img class="media-object img-circle pull-left" src="' +
+((__t = ( gravatar( email, 80 ) )) == null ? '' : __t) +
+'" width="40" height="40">\n        </div>\n        <div class="media-body">\n            <a href="#accounts/edit/' +
+((__t = ( id )) == null ? '' : __t) +
+'" class="pageItem-title" data-action="edit">' +
+((__t = ( first_name )) == null ? '' : __t) +
+' ' +
+((__t = ( last_name )) == null ? '' : __t) +
+'</a>\n            <div class="pageItem-date">\n                Laatste login: ' +
+((__t = ( last_login ? moment( last_login, Config.date_format ).fromNow() : 'Nooit' )) == null ? '' : __t) +
+'\n            </div>\n        </div>\n    </div>\n</div>\n\n<div class="pageItem-options">\n    <a class="pageItem-option" href="#accounts/edit/' +
+((__t = ( id )) == null ? '' : __t) +
+'" data-action="edit">\n        <i class="fa fa-fw fa-2x fa-pencil"></i>\n    </a>\n    ';
+ if (canDelete()) { ;
+__p += '\n    <a href="#" class="pageItem-option text-danger" data-action="destroy">\n        <i class="fa fa-fw fa-2x fa-trash-o"></i>\n    </a>\n    ';
+ } ;
+__p += '\n</div><!-- /.pageItem-options -->\n';
+
+}
+return __p
+};
+
+this["JST"]["account/list/templates/layout.html"] = function(obj) {
+obj || (obj = {});
+var __t, __p = '', __e = _.escape;
+with (obj) {
+__p += '<div class="row action-row">\n    <div class="col-md-offset-6 col-md-6 text-right">\n        <a href="#accounts/add" class="btn btn-success btn-sm"><i class="fa fa-plus"></i> Toevoegen</a>\n    </div>\n</div>\n\n<div class="row">\n    <div class="col-md-12 accounts">\n    </div>\n</div>';
+
+}
+return __p
+};
+
 this["JST"]["alert/show/templates/flash.html"] = function(obj) {
 obj || (obj = {});
 var __t, __p = '', __e = _.escape;
@@ -13,11 +86,32 @@ return __p
 
 this["JST"]["articles/_base/templates/form.html"] = function(obj) {
 obj || (obj = {});
-var __t, __p = '', __e = _.escape;
+var __t, __p = '', __e = _.escape, __j = Array.prototype.join;
+function print() { __p += __j.call(arguments, '') }
 with (obj) {
-__p += '<form class="form" data-parsley-validate>\n    <div class="row">\n        <div class="header">\n            <div class="col-sm-6">\n                <label>Titel</label>\n                <div class="form-group">\n                    <input type="text" name="title" class="form-control input-lg" placeholder="Titel" value="' +
+__p += '<form class="form" data-parsley-validate>\n    <div class="row">\n        <div class="header col-sm-12">\n            <div class="row">\n                <div class="col-sm-6">\n                    <div class="form-group">\n                        <label for="title">Titel</label>\n                        <input type="text" id="title" name="title" class="form-control input-lg" placeholder="Titel" value="' +
 ((__t = ( title )) == null ? '' : __t) +
-'" required="required">\n                    <small class="help-block">De titel van je pagina. Bijvoorbeeld: <em>Over ons</em></small>\n                </div>\n            </div>\n\n            <div class="col-sm-12">\n                <button class="btn btn-xs btn-success" type="submit"><i class="fa fa-check"></i> Opslaan</button>\n            </div>\n        </div>\n    </div>\n    <!--<div class="row">-->\n        <!--<div class="col-sm-6">-->\n            <!--<div class="form-group">-->\n                <!--<label for="page_id">Bovenliggende pagina</label>-->\n                <!--<select id="page_id" name="page_id" class="form-control" required="required"></select>-->\n            <!--</div>-->\n        <!--</div>-->\n        <!--<div class="col-sm-6">-->\n            <!--<div class="form-group">-->\n                <!--<label for="template_id">Template</label>-->\n                <!--<select id="template_id" name="template_id" class="form-control" required="required"></select>-->\n            <!--</div>-->\n        <!--</div>-->\n    <!--</div>-->\n\n    <div class="row">\n        <div class="col-sm-12">\n            <label>Samenvatting</label>\n            <div class="form-group">\n                <textarea class="form-control" name="summary">' +
+'" required="required">\n                        <small class="help-block">De titel van je pagina. Bijvoorbeeld: <em>Over ons</em></small>\n                    </div>\n                </div>\n                ';
+ if (user) { ;
+__p += '\n                <div class="col-sm-6">\n                    <div class="media">\n                        <div class="pull-left">\n                            <img class="media-object img-circle" src="' +
+((__t = ( gravatar( user.email, 100 ) )) == null ? '' : __t) +
+'" width="50" height="50">\n                        </div>\n                        <div class="media-body">\n                            <h4 class="media-heading">Laatste aanpassing</h4>\n                            <p><i class="fa fa-fw fa-user"></i> ' +
+((__t = ( user.first_name )) == null ? '' : __t) +
+' ' +
+((__t = ( user.last_name )) == null ? '' : __t) +
+'</p>\n                            <p><i class="fa fa-fw fa-clock-o"></i> ' +
+((__t = ( moment( updated_at, Config.date_format ).format("dddd, MMMM Do YYYY, HH:mm") )) == null ? '' : __t) +
+'</p>\n                        </div>\n                    </div>\n                </div>\n                ';
+ } ;
+__p += '\n            </div>\n\n            <div class="row">\n                <div class="col-sm-6">\n                    <div class="form-group">\n                        <label for="publish_at">Publiceer op</label>\n                        <input type="text" id="publish_at" name="publish_at" class="form-control" placeholder="Publiceer op" value="' +
+((__t = ( publish_at ? moment( publish_at, Config.date_format ).format( 'YYYY-MM-DD HH:mm' ) : '' )) == null ? '' : __t) +
+'">\n                    </div>\n                </div>\n                <div class="col-sm-6">\n                    <div class="form-group">\n                        <label>Leader Image</label>\n                        <input type="hidden" name="image_id" id="image_id">\n                        <input type="hidden" name="image" id="image">\n\n\n                        <div class="dropzone clickable inline" id="dropzone-attachment">\n                            <div class="dz-default dz-message"><span>Drag and Drop image here</span></div>\n                        </div>\n                    </div>\n\n                </div>\n            </div>\n            <div class="row">\n                <div class="col-sm-12">\n                    <button class="btn btn-xs btn-success" type="submit"><i class="fa fa-check"></i> Opslaan</button>\n                    ';
+ if (user) { ;
+__p += '\n                     <a class="btn btn-xs btn-default" href="' +
+((__t = ( page.path )) == null ? '' : __t) +
+'" target="_blank"><i class="fa fa-eye"></i> Bekijk op website</a>\n                    ';
+ } ;
+__p += '\n                </div>\n            </div>\n        </div>\n    </div>\n    <!--<div class="row">-->\n        <!--<div class="col-sm-6">-->\n            <!--<div class="form-group">-->\n                <!--<label for="page_id">Bovenliggende pagina</label>-->\n                <!--<select id="page_id" name="page_id" class="form-control" required="required"></select>-->\n            <!--</div>-->\n        <!--</div>-->\n        <!--<div class="col-sm-6">-->\n            <!--<div class="form-group">-->\n                <!--<label for="template_id">Template</label>-->\n                <!--<select id="template_id" name="template_id" class="form-control" required="required"></select>-->\n            <!--</div>-->\n        <!--</div>-->\n    <!--</div>-->\n\n    <div class="row">\n        <div class="col-sm-12">\n            <div class="form-group">\n                <label>Samenvatting</label>\n                <textarea class="form-control" name="summary">' +
 ((__t = ( summary )) == null ? '' : __t) +
 '</textarea>\n            </div>\n        </div>\n    </div>\n\n    <hr>\n\n    <div class="row">\n        <div class="col-sm-12">\n            <div class="form-group">\n                <div id="page-body" class="rocket-editor">' +
 ((__t = ( page.body )) == null ? '' : __t) +
@@ -53,9 +147,11 @@ var __t, __p = '', __e = _.escape, __j = Array.prototype.join;
 function print() { __p += __j.call(arguments, '') }
 with (obj) {
 __p += '<div class="pageItem-status">\n    <a href="#" class="pageItem-state js-pageItem-state" data-toggle="tooltip" data-placement="top" title="' +
-((__t = ( ( page.active == '1' ) ? 'Gepubliceerd' : 'Verborgen' )) == null ? '' : __t) +
+((__t = ( statusText() )) == null ? '' : __t) +
 '">\n        ';
- if ( page.active == '1' ) { ;
+ if ( status() == 'scheduled' ) { ;
+__p += '\n        <i class="text-warning fa fa-3x fa-clock-o"></i>\n        ';
+ } else if ( status() == 'active' ) { ;
 __p += '\n        <i class="text-success fa fa-3x fa-check-circle"></i>\n        ';
  } else { ;
 __p += '\n        <i class="text-muted fa fa-3x fa-circle-o"></i>\n        ';
@@ -65,7 +161,13 @@ __p += '\n    </a>\n</div><!-- /.pageItem-state -->\n\n<div class="pageItem-meta
 '" class="pageItem-title">' +
 ((__t = ( title )) == null ? '' : __t) +
 '</a>\n    <div class="pageItem-date">\n        ' +
-((__t = ( moment( created_at, Config.date_format ).fromNow() )) == null ? '' : __t) +
+((__t = ( moment( updated_at, Config.date_format ).fromNow() )) == null ? '' : __t) +
+' by\n        <img src="' +
+((__t = ( gravatar( user.email, 40 ) )) == null ? '' : __t) +
+'" width="20" height="20" class="avatar pageItem-avatar"> ' +
+((__t = ( user.first_name )) == null ? '' : __t) +
+' ' +
+((__t = ( user.last_name )) == null ? '' : __t) +
 '\n    </div>\n</div><!-- /.pageItem-meta -->\n\n<div class="pageItem-options">\n    <a class="pageItem-option" href="#articles/edit/' +
 ((__t = ( id )) == null ? '' : __t) +
 '">\n        <i class="fa fa-fw fa-2x fa-pencil"></i>\n    </a>\n    <a href="#" class="pageItem-option text-danger" data-action="destroy">\n        <i class="fa fa-fw fa-2x fa-trash-o"></i>\n    </a>\n</div><!-- /.pageItem-options -->\n';
@@ -126,7 +228,7 @@ this["JST"]["header/list/templates/header.html"] = function(obj) {
 obj || (obj = {});
 var __t, __p = '', __e = _.escape;
 with (obj) {
-__p += '<nav class="navbar navbar-default" role="navigation">\n    <div class="container">\n        <!-- Brand and toggle get grouped for better mobile display -->\n        <div class="navbar-header">\n            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">\n                <span class="sr-only">Toggle navigation</span>\n                <span class="icon-bar"></span>\n                <span class="icon-bar"></span>\n                <span class="icon-bar"></span>\n            </button>\n            <!--<a class="navbar-brand" href="#">-->\n                <!--<i class="fa fa-rocket"></i> Rocketship CMS-->\n            <!--</a>-->\n        </div>\n\n        <!-- Collect the nav links, forms, and other content for toggling -->\n        <div class="collapse navbar-collapse">\n            <ul class="nav navbar-nav" id="navigation">\n                <li><a href="#pages"><i class="fa fa-files-o"></i> Pagina\'s</a></li>\n                <li><a href="#articles"><i class="fa fa-pencil"></i> Artikels</a></li>\n            </ul>\n\n            <ul class="nav navbar-nav navbar-right">\n                <li class="user-dropdown dropdown">\n                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">\n                        <img src="" class="avatar img-rounded" width="21" height="21">\n                        <b class="caret"></b>\n                    </a>\n                    <ul class="dropdown-menu pull-right">\n                        <li><a href="/admin/logout"><i class="fa fa-power-off"></i> Afmelden</a></li>\n                    </ul>\n                </li>\n\n            </ul>\n        </div>\n    </div>\n</nav>';
+__p += '<nav class="navbar navbar-default" role="navigation">\n    <div class="container">\n        <!-- Brand and toggle get grouped for better mobile display -->\n        <div class="navbar-header">\n            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">\n                <span class="sr-only">Toggle navigation</span>\n                <span class="icon-bar"></span>\n                <span class="icon-bar"></span>\n                <span class="icon-bar"></span>\n            </button>\n            <!--<a class="navbar-brand" href="#">-->\n                <!--<i class="fa fa-rocket"></i> Rocketship CMS-->\n            <!--</a>-->\n        </div>\n\n        <!-- Collect the nav links, forms, and other content for toggling -->\n        <div class="collapse navbar-collapse">\n            <ul class="nav navbar-nav" id="navigation">\n                <li><a href="#pages"><i class="fa fa-files-o"></i> Pagina\'s</a></li>\n                <li><a href="#articles"><i class="fa fa-pencil"></i> Artikels</a></li>\n                <li><a href="#accounts"><i class="fa fa-users"></i> Gebruikers</a></li>\n            </ul>\n\n            <ul class="nav navbar-nav navbar-right">\n                <li class="user-dropdown dropdown">\n                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">\n                        <img src="" class="avatar img-circle" width="21" height="21">\n                        <b class="caret"></b>\n                    </a>\n                    <ul class="dropdown-menu pull-right">\n                        <li><a href="/admin/logout"><i class="fa fa-power-off"></i> Afmelden</a></li>\n                    </ul>\n                </li>\n\n            </ul>\n        </div>\n    </div>\n</nav>';
 
 }
 return __p
@@ -134,15 +236,22 @@ return __p
 
 this["JST"]["pages/_base/templates/form.html"] = function(obj) {
 obj || (obj = {});
-var __t, __p = '', __e = _.escape;
+var __t, __p = '', __e = _.escape, __j = Array.prototype.join;
+function print() { __p += __j.call(arguments, '') }
 with (obj) {
-__p += '<form class="form" data-parsley-validate>\n    <div class="row">\n        <div class="header">\n            <div class="col-sm-6">\n                <label>Titel</label>\n                <div class="form-group">\n                    <input type="text" name="title" class="form-control input-lg" placeholder="Titel" value="' +
+__p += '<form class="form" data-parsley-validate>\n    <div class="row">\n        <div class="header">\n            <div class="col-sm-6">\n                <div class="form-group">\n                    <label>Titel</label>\n                    <input type="text" name="title" class="form-control input-lg" placeholder="Titel" value="' +
 ((__t = ( title )) == null ? '' : __t) +
 '" required="required">\n                    <small class="help-block">De titel van je pagina. Bijvoorbeeld: <em>Over ons</em></small>\n                </div>\n            </div>\n            <div class="col-sm-6">\n                <div class="form-group">\n                    <label>URL</label>\n                    <div class="input-group input-group-lg">\n                        <span class="input-group-addon prefix">/' +
 ((__t = ( path.replace( slug, '' ) )) == null ? '' : __t) +
 '</span>\n                        <input type="text" name="slug" class="form-control input-lg" placeholder="URL" value="' +
 ((__t = ( slug )) == null ? '' : __t) +
-'">\n                    </div>\n                    <small class="help-block">De link naar je pagina. Bijvoorbeeld: <em>/over-ons/</em></small>\n                </div>\n            </div>\n            <div class="col-sm-12">\n                <button class="btn btn-xs btn-success" type="submit"><i class="fa fa-check"></i> Opslaan</button>\n            </div>\n        </div>\n    </div>\n    <div class="row">\n        <div class="col-sm-6">\n            <div class="form-group">\n                <label for="page_id">Bovenliggende pagina</label>\n                <select id="page_id" name="page_id" class="form-control" required="required"></select>\n            </div>\n        </div>\n        <div class="col-sm-6">\n            <div class="form-group">\n                <label for="template_id">Template</label>\n                <select id="template_id" name="template_id" class="form-control" required="required"></select>\n            </div>\n        </div>\n    </div>\n\n    <hr>\n\n    <div class="row">\n        <div class="col-sm-12">\n            <div class="form-group">\n                <div id="page-body" class="rocket-editor">' +
+'">\n                    </div>\n                    <small class="help-block">De link naar je pagina. Bijvoorbeeld: <em>/over-ons/</em></small>\n                </div>\n            </div>\n            <div class="col-sm-12">\n                <button class="btn btn-xs btn-success" type="submit"><i class="fa fa-check"></i> Opslaan</button>\n                ';
+ if (path) { ;
+__p += '\n                <a class="btn btn-xs btn-default" href="' +
+((__t = ( path )) == null ? '' : __t) +
+'" target="_blank"><i class="fa fa-eye"></i> Bekijk op website</a>\n                ';
+ } ;
+__p += '\n            </div>\n        </div>\n    </div>\n    <div class="row">\n        <div class="col-sm-6">\n            <div class="form-group">\n                <label for="page_id">Bovenliggende pagina</label>\n                <select id="page_id" name="page_id" class="form-control" required="required"></select>\n            </div>\n        </div>\n        <div class="col-sm-6">\n            <div class="form-group">\n                <label for="template_id">Template</label>\n                <select id="template_id" name="template_id" class="form-control" required="required"></select>\n            </div>\n        </div>\n    </div>\n\n    <hr>\n\n    <div class="row">\n        <div class="col-sm-12">\n            <div class="form-group">\n                <div id="page-body" class="rocket-editor">' +
 ((__t = ( body )) == null ? '' : __t) +
 '</div>\n            </div>\n        </div>\n    </div>\n\n    <div class="row">\n        <div class="col-sm-12 text-right">\n            <button class="ui btn btn-link" type="reset">Annuleer en ga terug</button>\n            <button class="btn btn-success" type="submit"><i class="fa fa-check"></i> Opslaan</button>\n        </div>\n    </div>\n</form>';
 
@@ -259,6 +368,16 @@ __p += '';
 return __p
 };
 
+this["JST"]["settings/show/templates/form.html"] = function(obj) {
+obj || (obj = {});
+var __t, __p = '', __e = _.escape;
+with (obj) {
+__p += '<form class="form form-horizontal" data-parsley-validate>\n    <div class="row">\n        <div class="col-sm-12">\n            <div class="form-group">\n                <label class="col-sm-2 control-label" for="blog_item_template">Blog item template</label>\n                <div class="col-sm-10">\n                    <select id="blog_item_template" name="blog.item.template" class="form-control" required="required"></select>\n                </div>\n            </div>\n        </div>\n    </div>\n\n    <div class="row">\n        <div class="col-sm-12 text-right">\n            <button class="btn btn-success" type="submit"><i class="fa fa-check"></i> Opslaan</button>\n        </div>\n    </div>\n</form>';
+
+}
+return __p
+};
+
 this["JST"]["templates/_base/templates/form.html"] = function(obj) {
 obj || (obj = {});
 var __t, __p = '', __e = _.escape;
@@ -350,7 +469,7 @@ this["JST"]["assets/coffee/components/loading/templates/loading.html"] = functio
 obj || (obj = {});
 var __t, __p = '', __e = _.escape;
 with (obj) {
-__p += '<h3 class="loading text-muted"><i class="fa fa-rocket"></i> Laden...</h3>';
+__p += '<h3 class="loading text-muted"><i class="fa fa-fw fa-rocket"></i> Laden...</h3>';
 
 }
 return __p
@@ -545,6 +664,40 @@ Backbone.Marionette.Renderer.render = function(template, data) {
   return path(data);
 };
 
+(function($) {
+  $.fn.mediumInsert.registerAddon("forms", {
+
+    /**
+    Maps initial function
+    @return {void}
+     */
+    init: function() {
+      this.$el = $.fn.mediumInsert.insert.$el;
+    },
+    insertButton: function(buttonLabels) {
+      var label;
+      label = "<i class=\"fa fa-check-square\"></i> Form";
+      return "<button data-addon=\"forms\" data-action=\"add\" class=\"medium-editor-action mediumInsert-action\">" + label + "</button>";
+    },
+
+    /**
+    Add map to placeholder
+    @param {element} placeholder Placeholder to add map to
+    @return {void}
+     */
+    add: function(placeholder) {
+      var formId;
+      $.fn.mediumInsert.insert.deselect();
+      formId = prompt("Formulier ID", "1");
+      if (formId !== null) {
+        placeholder.append("<rocket-form rocket-id=\"" + formId + "\"></rocket-form>");
+      }
+    }
+  });
+})(jQuery);
+
+var gravatar;
+
 _.mixin({
   stripTrailingSlash: function(url) {
     if (url.slice(-1) === '/') {
@@ -554,6 +707,13 @@ _.mixin({
     }
   }
 });
+
+gravatar = function(email, size) {
+  if (size == null) {
+    size = 40;
+  }
+  return '//www.gravatar.com/avatar/' + md5(email.toLowerCase()) + '?s=' + (size * 2);
+};
 
 String.prototype.repeat = function(num) {
   return new Array(num + 1).join(this);
@@ -570,12 +730,6 @@ window.ParsleyConfig = {
   errorsWrapper: '<span class="help-block">',
   errorTemplate: '<div></div>'
 };
-
-
-
-
-
-
 
 var Storage;
 
@@ -622,10 +776,14 @@ this.Rocket = (function(Backbone, Marionette) {
     App.csrfToken = $('meta[name="token"]').attr('content');
     this.currentUser = App.request('set:current:user', options.user);
     this.settings = options.settings;
+    this.allUsers = App.request('set:all:users', options.users);
     return this.apiUrl = _.stripTrailingSlash(options.api_url);
   });
   App.reqres.setHandler('get:current:user', function() {
     return App.currentUser;
+  });
+  App.reqres.setHandler("get:all:users", function() {
+    return App.allUsers;
   });
   App.reqres.setHandler('get:all:users', function() {
     return App.allUsers;
@@ -832,9 +990,13 @@ this.Rocket.module('Entities', function(Entities, App, Backbone, Marionette, $, 
       id: null,
       summary: '',
       title: '',
+      user: null,
+      publish_at: null,
       page: {
         body: ''
-      }
+      },
+      image_id: null,
+      image: null
     };
 
     Article.prototype.urlRoot = function() {
@@ -910,12 +1072,13 @@ this.Rocket.module('Entities', function(Entities, App, Backbone, Marionette, $, 
 
     Page.prototype.defaults = {
       id: null,
-      body: '',
+      body: '<p></p>',
       is_home: false,
       path: '',
       slug: '',
       template_id: 1,
-      title: ''
+      title: '',
+      user: null
     };
 
     Page.prototype.urlRoot = function() {
@@ -1032,6 +1195,67 @@ this.Rocket.module('Entities', function(Entities, App, Backbone, Marionette, $, 
 var __hasProp = {}.hasOwnProperty,
   __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
 
+this.Rocket.module('Entities', function(Entities, App) {
+  var API;
+  Entities.Setting = (function(_super) {
+    __extends(Setting, _super);
+
+    function Setting() {
+      return Setting.__super__.constructor.apply(this, arguments);
+    }
+
+    Setting.prototype.defaults = {
+      key: '',
+      value: ''
+    };
+
+    Setting.prototype.urlRoot = function() {
+      return App.request('get:url:api') + '/setting';
+    };
+
+    return Setting;
+
+  })(App.Entities.Model);
+  Entities.SettingCollection = (function(_super) {
+    __extends(SettingCollection, _super);
+
+    function SettingCollection() {
+      return SettingCollection.__super__.constructor.apply(this, arguments);
+    }
+
+    SettingCollection.prototype.model = Entities.Setting;
+
+    SettingCollection.prototype.url = function() {
+      return App.request('get:url:api') + '/setting';
+    };
+
+    return SettingCollection;
+
+  })(App.Entities.Collection);
+  API = {
+    getAll: function() {
+      var model;
+      model = new Entities.SettingCollection;
+      model.fetch({
+        reset: true
+      });
+      return model;
+    },
+    newSetting: function() {
+      return new Entities.Setting;
+    }
+  };
+  App.reqres.setHandler('setting:entities', function() {
+    return API.getAll();
+  });
+  return App.reqres.setHandler('new:setting:entity', function() {
+    return API.newSetting();
+  });
+});
+
+var __hasProp = {}.hasOwnProperty,
+  __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
+
 this.Rocket.module('Entities', function(Entities, App, Backbone, Marionette, $, _) {
   var API;
   Entities.Template = (function(_super) {
@@ -1071,11 +1295,12 @@ this.Rocket.module('Entities', function(Entities, App, Backbone, Marionette, $, 
 
   })(App.Entities.Collection);
   API = {
-    getAll: function() {
+    getAll: function(options) {
       var template;
       template = new Entities.TemplateCollection;
       template.fetch({
-        reset: true
+        reset: true,
+        data: options
       });
       return template;
     },
@@ -1091,8 +1316,8 @@ this.Rocket.module('Entities', function(Entities, App, Backbone, Marionette, $, 
       return new Entities.Template;
     }
   };
-  App.reqres.setHandler('template:entities', function() {
-    return API.getAll();
+  App.reqres.setHandler('template:entities', function(options) {
+    return API.getAll(options);
   });
   App.reqres.setHandler('template:entity', function(id) {
     return API.getTemplate(id);
@@ -1113,6 +1338,15 @@ this.Rocket.module("Entities", function(Entities, App, Backbone, Marionette, $, 
     function User() {
       return User.__super__.constructor.apply(this, arguments);
     }
+
+    User.prototype.defaults = {
+      first_name: '',
+      last_name: '',
+      email: '',
+      password: '',
+      activated: true,
+      last_login: null
+    };
 
     User.prototype.urlRoot = function() {
       return App.request("get:url:api") + "/user";
@@ -1520,6 +1754,345 @@ this.Rocket.module("Routers", function(Routers, App, Backbone, Marionette, $, _)
   })(Marionette.AppRouter);
 });
 
+var __hasProp = {}.hasOwnProperty,
+  __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
+
+this.Rocket.module('Views', function(Views, App, Backbone, Marionette, $, _) {
+  return Views.UserView = (function(_super) {
+    __extends(UserView, _super);
+
+    function UserView() {
+      return UserView.__super__.constructor.apply(this, arguments);
+    }
+
+    UserView.prototype.template = 'account/_base/templates/form';
+
+    UserView.prototype.ui = {
+      form: 'form',
+      submit: '[data-action="submit"],[type="submit"]'
+    };
+
+    UserView.prototype.events = {
+      'click @ui.submit': 'save'
+    };
+
+    UserView.prototype.save = function(e) {
+      e.preventDefault();
+      if (!this.ui.form.parsley().validate()) {
+        return;
+      }
+      return this.model.save(this.getSaveData(), {
+        collection: this.collection
+      });
+    };
+
+    return UserView;
+
+  })(App.Views.BaseForm);
+});
+
+var __hasProp = {}.hasOwnProperty,
+  __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
+
+this.Rocket.module("AccountApp", function(AccountApp, App, Backbone, Marionette, $, _) {
+  var API;
+  AccountApp.Router = (function(_super) {
+    __extends(Router, _super);
+
+    function Router() {
+      return Router.__super__.constructor.apply(this, arguments);
+    }
+
+    Router.prototype.appRoutes = {
+      "accounts": "list",
+      "accounts/add": "new",
+      "accounts/edit/:id": "edit"
+    };
+
+    return Router;
+
+  })(App.Routers.Router);
+  API = {
+    list: function() {
+      return new AccountApp.List.Controller;
+    },
+    "new": function() {
+      return new AccountApp.New.Controller({
+        region: App.mainRegion
+      });
+    },
+    edit: function(id, account) {
+      return new AccountApp.Edit.Controller({
+        region: App.mainRegion,
+        id: id,
+        account: account
+      });
+    }
+  };
+  App.vent.on("account:edit:clicked", function(account) {
+    App.navigate("/account/edit/" + account.id);
+    return API.edit(account.id, account);
+  });
+  App.vent.on("account:created account:updated", function(item) {
+    App.execute('alert:show:success', "Account \"" + (item.get('first_name')) + "\" was successfully saved!");
+    App.navigate("accounts");
+    return API.list();
+  });
+  return App.addInitializer(function() {
+    return new AccountApp.Router({
+      controller: API
+    });
+  });
+});
+
+var __hasProp = {}.hasOwnProperty,
+  __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
+
+this.Rocket.module("AccountApp.Edit", function(Edit, App, Backbone, Marionette, $, _) {
+  return Edit.Controller = (function(_super) {
+    __extends(Controller, _super);
+
+    function Controller() {
+      return Controller.__super__.constructor.apply(this, arguments);
+    }
+
+    Controller.prototype.initialize = function(options) {
+      var account, id;
+      account = options.account, id = options.id;
+      account || (account = App.request("user:entity", id));
+      this.listenTo(account, "updated", function() {
+        return App.vent.trigger("account:updated", account);
+      });
+      return App.execute("when:fetched", account, (function(_this) {
+        return function() {
+          var view;
+          view = _this.getEditView(account);
+          return _this.show(view);
+        };
+      })(this));
+    };
+
+    Controller.prototype.getEditView = function(account) {
+      return new Edit.User({
+        model: account
+      });
+    };
+
+    return Controller;
+
+  })(App.Controllers.Base);
+});
+
+var __hasProp = {}.hasOwnProperty,
+  __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
+
+this.Rocket.module("AccountApp.Edit", function(Edit, App, Backbone, Marionette, $, _) {
+  return Edit.User = (function(_super) {
+    __extends(User, _super);
+
+    function User() {
+      return User.__super__.constructor.apply(this, arguments);
+    }
+
+    return User;
+
+  })(App.Views.UserView);
+});
+
+var __hasProp = {}.hasOwnProperty,
+  __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
+
+this.Rocket.module("AccountApp.List", function(List, App, Backbone, Marionette, $, _) {
+  return List.Controller = (function(_super) {
+    __extends(Controller, _super);
+
+    function Controller() {
+      return Controller.__super__.constructor.apply(this, arguments);
+    }
+
+    Controller.prototype.initialize = function() {
+      var users;
+      users = App.request("get:all:users");
+      this.layout = this.getLayout();
+      this.listenTo(this.layout, 'show', (function(_this) {
+        return function() {
+          return _this.show(_this.getListView(users), {
+            region: _this.layout.listRegion
+          });
+        };
+      })(this));
+      return this.show(this.layout, {
+        loading: {
+          entities: users
+        }
+      });
+    };
+
+    Controller.prototype.getLayout = function() {
+      return new List.Layout();
+    };
+
+    Controller.prototype.getListView = function(users) {
+      var view;
+      view = new List.Accounts({
+        collection: users
+      });
+      this.listenTo(view, "childview:account:delete:clicked", function(child, args) {
+        var model;
+        model = args.model;
+        if (confirm("Gebruiker \"" + (model.get('first_name')) + " " + (model.get('last_name')) + "\" verwijderen?")) {
+          return model.destroy();
+        } else {
+          return false;
+        }
+      });
+      this.listenTo(view, 'childview:change:state', function(view, args) {
+        var model;
+        model = args.model;
+        model.set('actived', model.get('actived') === true ? true : false);
+        return model.save();
+      });
+      return view;
+    };
+
+    return Controller;
+
+  })(App.Controllers.Base);
+});
+
+var __hasProp = {}.hasOwnProperty,
+  __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
+
+this.Rocket.module("AccountApp.List", function(List, App, Backbone, Marionette, $, _) {
+  List.Layout = (function(_super) {
+    __extends(Layout, _super);
+
+    function Layout() {
+      return Layout.__super__.constructor.apply(this, arguments);
+    }
+
+    Layout.prototype.template = 'account/list/templates/layout';
+
+    Layout.prototype.regions = {
+      listRegion: '.accounts'
+    };
+
+    return Layout;
+
+  })(App.Views.LayoutView);
+  List.AccountItem = (function(_super) {
+    __extends(AccountItem, _super);
+
+    function AccountItem() {
+      return AccountItem.__super__.constructor.apply(this, arguments);
+    }
+
+    AccountItem.prototype.template = "account/list/templates/item";
+
+    AccountItem.prototype.className = "pageItem accountItem";
+
+    AccountItem.prototype.ui = {
+      destroy: '[data-action="destroy"]',
+      editButton: '[data-action="edit"]'
+    };
+
+    AccountItem.prototype.triggers = {
+      "click @ui.destroy": "account:delete:clicked"
+    };
+
+    AccountItem.prototype.events = {
+      "click @ui.editButton": "edit"
+    };
+
+    AccountItem.prototype.templateHelpers = function() {
+      return {
+        canDelete: function() {
+          var me;
+          me = App.request("get:current:user");
+          if (me.id !== this.id) {
+            return true;
+          } else {
+            return false;
+          }
+        }
+      };
+    };
+
+    AccountItem.prototype.edit = function(e) {
+      e.preventDefault();
+      return App.vent.trigger("account:edit:clicked", this.model);
+    };
+
+    return AccountItem;
+
+  })(App.Views.ItemView);
+  return List.Accounts = (function(_super) {
+    __extends(Accounts, _super);
+
+    function Accounts() {
+      return Accounts.__super__.constructor.apply(this, arguments);
+    }
+
+    Accounts.prototype.template = "account/list/templates/grid";
+
+    Accounts.prototype.childView = List.AccountItem;
+
+    Accounts.prototype.childViewContainer = ".pagesList";
+
+    return Accounts;
+
+  })(App.Views.CompositeView);
+});
+
+var __hasProp = {}.hasOwnProperty,
+  __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
+
+this.Rocket.module("AccountApp.New", function(New, App, Backbone, Marionette, $, _) {
+  return New.Controller = (function(_super) {
+    __extends(Controller, _super);
+
+    function Controller() {
+      return Controller.__super__.constructor.apply(this, arguments);
+    }
+
+    Controller.prototype.initialize = function() {
+      var user, view;
+      user = App.request("new:user:entity");
+      this.listenTo(user, "created", function() {
+        return App.vent.trigger("account:created", user);
+      });
+      view = this.getNewView(user);
+      return this.show(view);
+    };
+
+    Controller.prototype.getNewView = function(user) {
+      return new New.User({
+        model: user,
+        collection: App.request("get:all:users")
+      });
+    };
+
+    return Controller;
+
+  })(App.Controllers.Base);
+});
+
+var __hasProp = {}.hasOwnProperty,
+  __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
+
+this.Rocket.module("AccountApp.New", function(New, App, Backbone, Marionette, $, _) {
+  return New.User = (function(_super) {
+    __extends(User, _super);
+
+    function User() {
+      return User.__super__.constructor.apply(this, arguments);
+    }
+
+    return User;
+
+  })(App.Views.UserView);
+});
+
 this.Rocket.module('AlertApp', function(Alert, App, Backbone, Marionette, $, _) {
 
   /**
@@ -1603,10 +2176,10 @@ this.Rocket.module('AlertApp.Show', function(Show, App, Backbone, Marionette, $,
     View.prototype.attributes = function() {
       var attrs;
       attrs = {
-        "class": 'alert alert-top'
+        "class": 'alert alert-top animated fadeIn'
       };
       if (this.options.extraClassName) {
-        attrs["class"] = "alert  alert-top " + this.options.extraClassName;
+        attrs["class"] += ' ' + this.options.extraClassName;
       }
       return attrs;
     };
@@ -1614,9 +2187,9 @@ this.Rocket.module('AlertApp.Show', function(Show, App, Backbone, Marionette, $,
     View.prototype.onShow = function() {
       return this.timeOut = setTimeout((function(_this) {
         return function() {
-          return _this.$el.addClass("animated fadeOut");
+          return _this.$el.addClass("fadeOut");
         };
-      })(this), 1000);
+      })(this), 2000);
     };
 
     View.prototype.onBeforeClose = function() {
@@ -1646,26 +2219,46 @@ this.Rocket.module('Views', function(Views, App, Backbone, Marionette, $, _) {
     ArticleView.prototype.ui = {
       form: 'form',
       submit: '[data-action="submit"],[type="submit"]',
-      editor: '.rocket-editor'
+      editor: '.rocket-editor',
+      publishAt: '[name="publish_at"]'
     };
 
     ArticleView.prototype.events = {
       'click @ui.submit': 'save'
     };
 
-    ArticleView.prototype.onRender = function() {
-      console.log(this.model);
-      return this.editor = new MediumEditor(this.ui.editor);
+    ArticleView.prototype.onShow = function() {
+      this.publishAt = this.ui.publishAt.datetimepicker({
+        format: 'YYYY-MM-DD HH:mm',
+        icons: {
+          time: "fa fa-clock-o",
+          date: "fa fa-calendar",
+          up: "fa fa-arrow-up",
+          down: "fa fa-arrow-down"
+        }
+      });
+      this.editor = new MediumEditor(this.ui.editor);
+      this.ui.editor.mediumInsert({
+        editor: this.editor,
+        addons: {
+          forms: {},
+          embeds: {
+            oembedProxy: 'http://medium.iframe.ly/api/oembed?iframe=1'
+          }
+        }
+      });
+      return App.vent.trigger("setup:dropzone", "#dropzone-attachment", this.model.get("image"));
     };
 
     ArticleView.prototype.onBeforeClose = function() {
-      return this.editor.deactivate();
+      this.editor.deactivate();
+      return this.publishAt.destroy();
     };
 
     ArticleView.prototype.formatSaveData = function(data) {
       var body;
       body = this.editor.serialize();
-      data.body = body['page-body']['value'];
+      data['body'] = body['page-body']['value'];
       return data;
     };
 
@@ -1714,9 +2307,8 @@ this.Rocket.module("ArticlesApp", function(ArticlesApp, App, Backbone, Marionett
   };
   App.vent.on('article:created article:updated', function(item) {
     App.execute('alert:show:success', "Article \"" + (item.get('title')) + "\" was successfully saved!");
-    return App.navigate("articles/edit/" + item.id, {
-      trigger: true
-    });
+    App.navigate("articles");
+    return API.list();
   });
   return App.addInitializer(function() {
     return new ArticlesApp.Router({
@@ -1818,7 +2410,17 @@ this.Rocket.module('ArticlesApp.List', function(List, App, Backbone, Marionette,
 
     PageItem.prototype.template = 'articles/list/templates/item';
 
-    PageItem.prototype.className = 'pageItem';
+    PageItem.prototype.attributes = function() {
+      if (String(this.model.get("page").active) === "1" && this.model.get("publish_at") > moment().format('YYYY-MM-DD HH:mm:ss')) {
+        return {
+          "class": "pageItem pageItem--scheduled"
+        };
+      } else {
+        return {
+          "class": "pageItem pageItem--published"
+        };
+      }
+    };
 
     PageItem.prototype.ui = {
       clickableState: '.js-pageItem-state',
@@ -1833,6 +2435,27 @@ this.Rocket.module('ArticlesApp.List', function(List, App, Backbone, Marionette,
 
     PageItem.prototype.modelEvents = {
       "change": "render"
+    };
+
+    PageItem.prototype.templateHelpers = function() {
+      return {
+        status: function() {
+          if (String(this.page.active) === "1" && this.publish_at > moment().format('YYYY-MM-DD HH:mm:ss')) {
+            return 'scheduled';
+          } else if (String(this.page.active) === "1") {
+            return 'active';
+          }
+          return 'inactive';
+        },
+        statusText: function() {
+          if (String(this.page.active) === "1" && this.publish_at > moment().format('YYYY-MM-DD HH:mm:ss')) {
+            return 'Actief vanaf: ' + moment(this.publish_at).format('DD-MM-YYYY HH:mm');
+          } else if (String(this.page.active) === "1") {
+            return 'Actief';
+          }
+          return 'Inactief';
+        }
+      };
     };
 
     PageItem.prototype.onDomRefresh = function() {
@@ -2042,6 +2665,60 @@ this.Rocket.module('ArticlesApp.Show', function(Show, App, Backbone, Marionette,
   })(App.Views.ArticleView);
 });
 
+this.Rocket.module("DropzoneApp", function(DropzoneApp, App, Backbone, Marionette, $, _) {
+  var API;
+  Dropzone.autoDiscover = false;
+  API = {
+    setupDropzone: function(el, defaultImg) {
+      var mockFile, myDropzone;
+      if (defaultImg == null) {
+        defaultImg = null;
+      }
+      myDropzone = new Dropzone(el, {
+        url: App.request("get:url:api") + "/image",
+        method: "POST",
+        addRemoveLinks: true,
+        maxFiles: 1,
+        acceptedFiles: "image/*"
+      });
+      myDropzone.on("maxfilesexceeded", function(file) {
+        return this.removeFile(file);
+      });
+      myDropzone.on("removedfile", function(file) {
+        $("#image_id").val("");
+        $("#image").val("");
+        return myDropzone.options.maxFiles = 1;
+      });
+      myDropzone.on("error", function(file, message, xhr) {
+        var msg;
+        if (xhr) {
+          msg = $.parseJSON(message);
+          return App.execute('alert:show:warning', "Oops! \"" + msg.error.message + "\"");
+        } else {
+          return App.execute('alert:show:warning', "Oops! \"" + message + "\"");
+        }
+      });
+      myDropzone.on("success", function(file, contents) {
+        $("#image_id").val(contents.id);
+        return $("#image").val(file.name);
+      });
+      if (defaultImg) {
+        mockFile = {
+          name: "Filename",
+          size: 12345
+        };
+        myDropzone.emit("addedfile", mockFile);
+        myDropzone.emit("thumbnail", mockFile, "" + defaultImg.public_path + "/" + defaultImg.name);
+        myDropzone.options.maxFiles = 0;
+        return $("#image_id").val(defaultImg.id);
+      }
+    }
+  };
+  return App.vent.on("setup:dropzone", function(el, defaultImg) {
+    return API.setupDropzone(el, defaultImg);
+  });
+});
+
 this.Rocket.module("HeaderApp", function(HeaderApp, App, Backbone, Marionette, $, _) {
   var API;
   this.startWithParent = false;
@@ -2204,8 +2881,17 @@ this.Rocket.module('Views', function(Views, App, Backbone, Marionette, $, _) {
         prefix = '&nbsp;&nbsp;&nbsp;&nbsp;'.repeat(model.get('level'));
         return "" + prefix + (model.get('title'));
       }, this.model.get('page_id'));
-      return this.editor = new MediumEditor(this.ui.editor, {
+      this.editor = new MediumEditor(this.ui.editor, {
         buttons: ['bold', 'italic', 'underline', 'anchor', 'header1', 'header2', 'quote', 'unorderedlist']
+      });
+      return this.ui.editor.mediumInsert({
+        editor: this.editor,
+        addons: {
+          forms: {},
+          embeds: {
+            oembedProxy: 'http://medium.iframe.ly/api/oembed?iframe=1'
+          }
+        }
       });
     };
 
@@ -2216,6 +2902,7 @@ this.Rocket.module('Views', function(Views, App, Backbone, Marionette, $, _) {
     PageView.prototype.formatSaveData = function(data) {
       var body;
       body = this.editor.serialize();
+      console.log(body);
       data.body = body['page-body']['value'];
       return data;
     };
@@ -2504,9 +3191,8 @@ this.Rocket.module('PagesApp', function(PagesApp, App, Backbone, Marionette, $, 
   };
   App.vent.on('page:created page:updated', function(item) {
     App.execute('alert:show:success', "Page \"" + (item.get('title')) + "\" was successfully saved!");
-    return App.navigate("pages/edit/" + item.id, {
-      trigger: true
-    });
+    App.navigate("pages");
+    return API.list();
   });
   App.addInitializer(function() {
     return new PagesApp.Router({
@@ -2573,6 +3259,131 @@ this.Rocket.module('PagesApp.Show', function(Show, App, Backbone, Marionette, $,
     return View;
 
   })(App.Views.PageView);
+});
+
+var __hasProp = {}.hasOwnProperty,
+  __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
+
+this.Rocket.module('SettingsApp', function(SettingsApp, App, Backbone, Marionette, $, _) {
+
+  /**
+   * The router
+   */
+  var API;
+  SettingsApp.Router = (function(_super) {
+    __extends(Router, _super);
+
+    function Router() {
+      return Router.__super__.constructor.apply(this, arguments);
+    }
+
+    Router.prototype.appRoutes = {
+      'settings': 'show'
+    };
+
+    return Router;
+
+  })(App.Routers.Router);
+  API = {
+    show: function() {
+      return new SettingsApp.Show.Controller;
+    }
+  };
+  return App.addInitializer(function() {
+    return new SettingsApp.Router({
+      controller: API
+    });
+  });
+});
+
+var __hasProp = {}.hasOwnProperty,
+  __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
+
+this.Rocket.module('SettingsApp.Show', function(Show, App, Backbone, Marionette, $, _) {
+  return Show.Controller = (function(_super) {
+    __extends(Controller, _super);
+
+    function Controller() {
+      return Controller.__super__.constructor.apply(this, arguments);
+    }
+
+    Controller.prototype.initialize = function(options) {
+      var settings, templates;
+      templates = App.request('template:entities', {
+        restricted: false
+      });
+      settings = App.request('setting:entities');
+      this.view = this.getView(settings, templates);
+      return this.show(this.view, {
+        loading: {
+          entities: [settings, templates]
+        }
+      });
+    };
+
+    Controller.prototype.getView = function(settings, templates) {
+      return new Show.View({
+        collection: settings,
+        templateCollection: templates
+      });
+    };
+
+    return Controller;
+
+  })(App.Controllers.Base);
+});
+
+var __hasProp = {}.hasOwnProperty,
+  __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
+
+this.Rocket.module('SettingsApp.Show', function(Show, App, Backbone, Marionette, $, _) {
+  return Show.View = (function(_super) {
+    __extends(View, _super);
+
+    function View() {
+      return View.__super__.constructor.apply(this, arguments);
+    }
+
+    View.prototype.template = 'settings/show/templates/form';
+
+    View.prototype.ui = {
+      form: 'form',
+      template: '#blog_item_template',
+      submit: '[data-action="submit"],[type="submit"]'
+    };
+
+    View.prototype.events = {
+      'click @ui.submit': 'save'
+    };
+
+    View.prototype.onRender = function() {
+      var model;
+      model = this.collection.findWhere({
+        key: 'blog.item.template'
+      });
+      if (!model) {
+        model = App.request('new:setting:entity');
+      }
+      console.log(model);
+      return this.renderSelect(this.options.templateCollection, this.ui.template, 'id', 'name', model.get('value'));
+    };
+
+    View.prototype.formatSaveData = function(data) {
+      console.log(data);
+      return data;
+    };
+
+    View.prototype.save = function(e) {
+      e.preventDefault();
+      if (!this.ui.form.parsley().validate()) {
+        return;
+      }
+      return this.collection.save(this.getSaveData());
+    };
+
+    return View;
+
+  })(App.Views.BaseForm);
 });
 
 var __hasProp = {}.hasOwnProperty,

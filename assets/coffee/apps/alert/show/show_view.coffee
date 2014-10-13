@@ -10,17 +10,17 @@
         ###
         attributes: ->
             attrs =
-                class: 'alert alert-top'
+                class: 'alert alert-top animated fadeIn'
 
             if @options.extraClassName
-                attrs.class = "alert  alert-top #{ @options.extraClassName }"
+                attrs.class += ' ' + @options.extraClassName
 
             attrs
 
         onShow: ->
             @timeOut = setTimeout =>
-                @$el.addClass "animated fadeOut"
-            , 1000
+                @$el.addClass "fadeOut"
+            , 2000
 
         onBeforeClose: ->
             clearTimeout @timeOut

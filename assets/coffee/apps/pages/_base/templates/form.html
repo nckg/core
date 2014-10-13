@@ -2,8 +2,8 @@
     <div class="row">
         <div class="header">
             <div class="col-sm-6">
-                <label>Titel</label>
                 <div class="form-group">
+                    <label>Titel</label>
                     <input type="text" name="title" class="form-control input-lg" placeholder="Titel" value="<%= title %>" required="required">
                     <small class="help-block">De titel van je pagina. Bijvoorbeeld: <em>Over ons</em></small>
                 </div>
@@ -20,6 +20,9 @@
             </div>
             <div class="col-sm-12">
                 <button class="btn btn-xs btn-success" type="submit"><i class="fa fa-check"></i> Opslaan</button>
+                <% if (path) { %>
+                <a class="btn btn-xs btn-default" href="<%= path %>" target="_blank"><i class="fa fa-eye"></i> Bekijk op website</a>
+                <% } %>
             </div>
         </div>
     </div>

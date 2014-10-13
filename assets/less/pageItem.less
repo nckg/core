@@ -10,14 +10,26 @@
 .pageItem:first-child {
     border-top: none;
 }
+.pageItem--published {
+
+}
 .pageItem-status {
     .make-xs-column(1);
 }
 .pageItem-state {
     display: inline-block;
 }
+.pageItem-disabled {
+    .text-muted;
+}
+.pageItem-disabled .pageItem-state {
+    .text-muted;
+}
 .pageItem-meta {
-    .make-xs-column(10);
+    .make-xs-column(9);
+}
+.pageItem-avatar {
+    .img-circle;
 }
 .pageItem-title {
     font-size: @font-size-h5;
@@ -28,7 +40,7 @@
     font-size: @font-size-small;
 }
 .pageItem-options {
-    .make-md-column(1);
+    .make-md-column(2);
     .text-right;
 }
 

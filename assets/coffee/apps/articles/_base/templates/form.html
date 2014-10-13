@@ -1,16 +1,58 @@
 <form class="form" data-parsley-validate>
     <div class="row">
-        <div class="header">
-            <div class="col-sm-6">
-                <label>Titel</label>
-                <div class="form-group">
-                    <input type="text" name="title" class="form-control input-lg" placeholder="Titel" value="<%= title %>" required="required">
-                    <small class="help-block">De titel van je pagina. Bijvoorbeeld: <em>Over ons</em></small>
+        <div class="header col-sm-12">
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label for="title">Titel</label>
+                        <input type="text" id="title" name="title" class="form-control input-lg" placeholder="Titel" value="<%= title %>" required="required">
+                        <small class="help-block">De titel van je pagina. Bijvoorbeeld: <em>Over ons</em></small>
+                    </div>
                 </div>
+                <% if (user) { %>
+                <div class="col-sm-6">
+                    <div class="media">
+                        <div class="pull-left">
+                            <img class="media-object img-circle" src="<%= gravatar( user.email, 100 ) %>" width="50" height="50">
+                        </div>
+                        <div class="media-body">
+                            <h4 class="media-heading">Laatste aanpassing</h4>
+                            <p><i class="fa fa-fw fa-user"></i> <%= user.first_name %> <%= user.last_name %></p>
+                            <p><i class="fa fa-fw fa-clock-o"></i> <%= moment( updated_at, Config.date_format ).format("dddd, MMMM Do YYYY, HH:mm") %></p>
+                        </div>
+                    </div>
+                </div>
+                <% } %>
             </div>
 
-            <div class="col-sm-12">
-                <button class="btn btn-xs btn-success" type="submit"><i class="fa fa-check"></i> Opslaan</button>
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label for="publish_at">Publiceer op</label>
+                        <input type="text" id="publish_at" name="publish_at" class="form-control" placeholder="Publiceer op" value="<%= publish_at ? moment( publish_at, Config.date_format ).format( 'YYYY-MM-DD HH:mm' ) : '' %>">
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label>Leader Image</label>
+                        <input type="hidden" name="image_id" id="image_id">
+                        <input type="hidden" name="image" id="image">
+
+
+                        <div class="dropzone clickable inline" id="dropzone-attachment">
+                            <div class="dz-default dz-message"><span>Drag and Drop image here</span></div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    <button class="btn btn-xs btn-success" type="submit"><i class="fa fa-check"></i> Opslaan</button>
+                    <% if (user) { %>
+                     <a class="btn btn-xs btn-default" href="<%= page.path %>" target="_blank"><i class="fa fa-eye"></i> Bekijk op website</a>
+                    <% } %>
+                </div>
             </div>
         </div>
     </div>
@@ -31,8 +73,8 @@
 
     <div class="row">
         <div class="col-sm-12">
-            <label>Samenvatting</label>
             <div class="form-group">
+                <label>Samenvatting</label>
                 <textarea class="form-control" name="summary"><%= summary %></textarea>
             </div>
         </div>

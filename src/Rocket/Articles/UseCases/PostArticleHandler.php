@@ -54,7 +54,8 @@ class PostArticleHandler implements Handler
             $request->body,
             $request->pageId,
             $request->templateId,
-            false
+            false,
+            $request->publishAt
         );
 
         // create a new page for it
@@ -64,7 +65,9 @@ class PostArticleHandler implements Handler
             $request->user,
             $request->title,
             $request->summary,
-            null
+            $pageResponse->page->id,
+            $request->imageId,
+            $request->publishAt
         );
 
         $pageResponse->page->article()->save($article);

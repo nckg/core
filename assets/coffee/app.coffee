@@ -9,13 +9,16 @@
 
         @currentUser = App.request 'set:current:user', options.user
         @settings = options.settings
-        # @allUsers = App.request 'set:all:users', options.users
+        @allUsers = App.request 'set:all:users', options.users
         @apiUrl = _.stripTrailingSlash options.api_url
         # @adminUrl = _.stripTrailingSlash options.admin_url
 
     # Set a handler so that other parts of the app can grab the current user.
     App.reqres.setHandler 'get:current:user', ->
         App.currentUser
+
+    App.reqres.setHandler "get:all:users", ->
+        App.allUsers
 
     App.reqres.setHandler 'get:all:users', ->
         App.allUsers

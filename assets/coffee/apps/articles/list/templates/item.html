@@ -1,6 +1,8 @@
 <div class="pageItem-status">
-    <a href="#" class="pageItem-state js-pageItem-state" data-toggle="tooltip" data-placement="top" title="<%= ( page.active == '1' ) ? 'Gepubliceerd' : 'Verborgen' %>">
-        <% if ( page.active == '1' ) { %>
+    <a href="#" class="pageItem-state js-pageItem-state" data-toggle="tooltip" data-placement="top" title="<%= statusText() %>">
+        <% if ( status() == 'scheduled' ) { %>
+        <i class="text-warning fa fa-3x fa-clock-o"></i>
+        <% } else if ( status() == 'active' ) { %>
         <i class="text-success fa fa-3x fa-check-circle"></i>
         <% } else { %>
         <i class="text-muted fa fa-3x fa-circle-o"></i>
@@ -11,7 +13,8 @@
 <div class="pageItem-meta">
     <a href="#articles/edit/<%= id %>" class="pageItem-title"><%= title %></a>
     <div class="pageItem-date">
-        <%= moment( created_at, Config.date_format ).fromNow() %>
+        <%= moment( updated_at, Config.date_format ).fromNow() %> by
+        <img src="<%= gravatar( user.email, 40 ) %>" width="20" height="20" class="avatar pageItem-avatar"> <%= user.first_name %> <%= user.last_name %>
     </div>
 </div><!-- /.pageItem-meta -->
 

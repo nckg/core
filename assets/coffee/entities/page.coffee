@@ -3,12 +3,13 @@
     class Entities.Page extends App.Entities.Model
         defaults:
             id: null
-            body: ''
+            body: '<p></p>'
             is_home: no
             path: ''
             slug: ''
             template_id: 1
             title: ''
+            user: null
 
         urlRoot: ->
             App.request( 'get:url:api' ) + '/page'
