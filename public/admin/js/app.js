@@ -228,7 +228,7 @@ this["JST"]["header/list/templates/header.html"] = function(obj) {
 obj || (obj = {});
 var __t, __p = '', __e = _.escape;
 with (obj) {
-__p += '<nav class="navbar navbar-default" role="navigation">\n    <div class="container">\n        <!-- Brand and toggle get grouped for better mobile display -->\n        <div class="navbar-header">\n            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">\n                <span class="sr-only">Toggle navigation</span>\n                <span class="icon-bar"></span>\n                <span class="icon-bar"></span>\n                <span class="icon-bar"></span>\n            </button>\n            <!--<a class="navbar-brand" href="#">-->\n                <!--<i class="fa fa-rocket"></i> Rocketship CMS-->\n            <!--</a>-->\n        </div>\n\n        <!-- Collect the nav links, forms, and other content for toggling -->\n        <div class="collapse navbar-collapse">\n            <ul class="nav navbar-nav" id="navigation">\n                <li><a href="#pages"><i class="fa fa-files-o"></i> Pagina\'s</a></li>\n                <li><a href="#articles"><i class="fa fa-pencil"></i> Artikels</a></li>\n                <li><a href="#accounts"><i class="fa fa-users"></i> Gebruikers</a></li>\n            </ul>\n\n            <ul class="nav navbar-nav navbar-right">\n                <li class="user-dropdown dropdown">\n                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">\n                        <img src="" class="avatar img-circle" width="21" height="21">\n                        <b class="caret"></b>\n                    </a>\n                    <ul class="dropdown-menu pull-right">\n                        <li><a href="/admin/logout"><i class="fa fa-power-off"></i> Afmelden</a></li>\n                    </ul>\n                </li>\n\n            </ul>\n        </div>\n    </div>\n</nav>';
+__p += '<nav class="navbar navbar-default" role="navigation">\n    <div class="container">\n        <!-- Brand and toggle get grouped for better mobile display -->\n        <div class="navbar-header">\n            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">\n                <span class="sr-only">Toggle navigation</span>\n                <span class="icon-bar"></span>\n                <span class="icon-bar"></span>\n                <span class="icon-bar"></span>\n            </button>\n            <!--<a class="navbar-brand" href="#">-->\n                <!--<i class="fa fa-rocket"></i> Rocketship CMS-->\n            <!--</a>-->\n        </div>\n\n        <!-- Collect the nav links, forms, and other content for toggling -->\n        <div class="collapse navbar-collapse">\n            <ul class="nav navbar-nav" id="navigation">\n                <li><a href="#pages"><i class="fa fa-files-o"></i> Pagina\'s</a></li>\n                <li><a href="#articles"><i class="fa fa-pencil"></i> Artikels</a></li>\n                <li><a href="#accounts"><i class="fa fa-users"></i> Gebruikers</a></li>\n            </ul>\n\n            <ul class="nav navbar-nav navbar-right">\n                <li class="user-dropdown dropdown">\n                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">\n                        <img src="" class="avatar img-circle" width="21" height="21">\n                        <b class="caret"></b>\n                    </a>\n                    <ul class="dropdown-menu pull-right">\n                        <li><a href="/admin/logout"><i class="fa fa-fw fa-power-off"></i> Afmelden</a></li>\n                    </ul>\n                </li>\n\n            </ul>\n        </div>\n    </div>\n</nav>';
 
 }
 return __p
@@ -665,7 +665,7 @@ Backbone.Marionette.Renderer.render = function(template, data) {
 };
 
 (function($) {
-  $.fn.mediumInsert.registerAddon("forms", {
+  return $.fn.mediumInsert.registerAddon("forms", {
 
     /**
     Maps initial function
@@ -673,11 +673,11 @@ Backbone.Marionette.Renderer.render = function(template, data) {
      */
     init: function() {
       this.$el = $.fn.mediumInsert.insert.$el;
+      return this.preparePreviousForms();
     },
     insertButton: function(buttonLabels) {
-      var label;
-      label = "<i class=\"fa fa-check-square\"></i> Form";
-      return "<button data-addon=\"forms\" data-action=\"add\" class=\"medium-editor-action mediumInsert-action\">" + label + "</button>";
+      console.log(buttonLabels);
+      return '<button data-addon="forms" data-action="add" class="medium-editor-action mediumInsert-action"> <i class="fa fa-fw fa-check-square"></i> </button>';
     },
 
     /**
@@ -685,13 +685,21 @@ Backbone.Marionette.Renderer.render = function(template, data) {
     @param {element} placeholder Placeholder to add map to
     @return {void}
      */
-    add: function(placeholder) {
+    add: function($placeholder) {
       var formId;
       $.fn.mediumInsert.insert.deselect();
       formId = prompt("Formulier ID", "1");
       if (formId !== null) {
-        placeholder.append("<rocket-form rocket-id=\"" + formId + "\"></rocket-form>");
+        $placeholder.append("<rocket-form rocket-id=\"" + formId + "\"></rocket-form>");
+        return this.currentPlaceholder = $placeholder;
       }
+    },
+    preparePreviousForms: function() {
+      return this.$el.find('rocket-form').each(function() {
+        var $parent;
+        $parent = $(this).parent();
+        return $parent.html("<div class=\"mediumInsert-placeholder\" draggable=\"true\">\n    " + ($parent.html()) + "\n</div>");
+      });
     }
   });
 })(jQuery);
@@ -2237,7 +2245,10 @@ this.Rocket.module('Views', function(Views, App, Backbone, Marionette, $, _) {
           down: "fa fa-arrow-down"
         }
       });
-      this.editor = new MediumEditor(this.ui.editor);
+      this.editor = new MediumEditor(this.ui.editor, {
+        buttons: ['bold', 'italic', 'underline', 'anchor', 'header1', 'header2', 'quote', 'unorderedlist'],
+        buttonLabels: 'fontawesome'
+      });
       this.ui.editor.mediumInsert({
         editor: this.editor,
         addons: {
@@ -2882,7 +2893,8 @@ this.Rocket.module('Views', function(Views, App, Backbone, Marionette, $, _) {
         return "" + prefix + (model.get('title'));
       }, this.model.get('page_id'));
       this.editor = new MediumEditor(this.ui.editor, {
-        buttons: ['bold', 'italic', 'underline', 'anchor', 'header1', 'header2', 'quote', 'unorderedlist']
+        buttons: ['bold', 'italic', 'underline', 'anchor', 'header1', 'header2', 'quote', 'unorderedlist'],
+        buttonLabels: 'fontawesome'
       });
       return this.ui.editor.mediumInsert({
         editor: this.editor,
@@ -2902,7 +2914,6 @@ this.Rocket.module('Views', function(Views, App, Backbone, Marionette, $, _) {
     PageView.prototype.formatSaveData = function(data) {
       var body;
       body = this.editor.serialize();
-      console.log(body);
       data.body = body['page-body']['value'];
       return data;
     };

@@ -29,7 +29,9 @@
                     up: "fa fa-arrow-up"
                     down: "fa fa-arrow-down"
 
-            @editor = new MediumEditor @ui.editor
+            @editor = new MediumEditor @ui.editor,
+                buttons: [ 'bold', 'italic', 'underline', 'anchor', 'header1', 'header2', 'quote', 'unorderedlist' ]
+                buttonLabels: 'fontawesome'
 
             @ui.editor.mediumInsert
                 editor: @editor

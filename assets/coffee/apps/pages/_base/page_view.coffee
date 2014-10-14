@@ -49,6 +49,7 @@
 
             @editor = new MediumEditor @ui.editor,
                 buttons: [ 'bold', 'italic', 'underline', 'anchor', 'header1', 'header2', 'quote', 'unorderedlist' ]
+                buttonLabels: 'fontawesome'
 
             # insert
             @ui.editor.mediumInsert
@@ -68,7 +69,6 @@
         formatSaveData: ( data ) ->
             # get data from sir Trevor
             body = @editor.serialize()
-            console.log( body )
             data.body = body[ 'page-body' ][ 'value' ]
 
             data

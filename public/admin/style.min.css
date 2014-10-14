@@ -3253,7 +3253,7 @@ textarea.parsley-error {
   color: #357ebd;
 }
 /*! 
- * medium-editor-insert-plugin v0.2.13 - jQuery insert plugin for MediumEditor
+ * medium-editor-insert-plugin v0.2.14 - jQuery insert plugin for MediumEditor
  *
  * https://github.com/orthes/medium-editor-insert-plugin
  * 
@@ -10335,6 +10335,62 @@ textarea.rocket-editor {
 .mediumInsert {
   margin-left: 0px !important;
   min-height: 18px;
+}
+.mediumInsert .mediumInsert-placeholder {
+  margin-left: 0;
+}
+.medium-editor-action {
+  background: #efefef;
+  border: 1px solid #ccc;
+  padding: 6px 12px;
+  color: #333;
+  text-decoration: none;
+  display: inline-block;
+  margin-bottom: 0;
+  font-weight: normal;
+  text-align: center;
+  vertical-align: middle;
+  cursor: pointer;
+  background-image: none;
+  border: 1px solid transparent;
+  white-space: nowrap;
+  padding: 10px 15px;
+  font-size: 15px;
+  line-height: 1.42857143;
+  border-radius: 4px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+.medium-editor-action:focus,
+.medium-editor-action:active:focus,
+.medium-editor-action.active:focus {
+  outline: thin dotted;
+  outline: 5px auto -webkit-focus-ring-color;
+  outline-offset: -2px;
+}
+.medium-editor-action:hover,
+.medium-editor-action:focus {
+  color: #ffffff;
+  text-decoration: none;
+}
+.medium-editor-action:active,
+.medium-editor-action.active {
+  outline: 0;
+  background-image: none;
+  -webkit-box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+  box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+}
+.medium-editor-action.disabled,
+.medium-editor-action[disabled],
+fieldset[disabled] .medium-editor-action {
+  cursor: not-allowed;
+  pointer-events: none;
+  opacity: 0.65;
+  filter: alpha(opacity=65);
+  -webkit-box-shadow: none;
+  box-shadow: none;
 }
 .mediumInsert .mediumInsert-buttons {
   left: 50%;
