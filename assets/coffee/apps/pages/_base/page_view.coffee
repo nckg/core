@@ -51,16 +51,22 @@
                 buttons: [ 'bold', 'italic', 'underline', 'anchor', 'header1', 'header2', 'quote', 'unorderedlist' ]
                 buttonLabels: 'fontawesome'
 
-            # insert
+            that = @
             @ui.editor.mediumInsert
                 editor: @editor
                 addons:
-                    forms: {}
+                    forms:
+                        setForm: ( $placeholder, that ) ->
+                            # DO WHATEVER YOU WANT HERE
+                            controller = App.request( 'form:prompt' )
+                            controller.view.on 'prompt:submit', ( data ) ->
+                                $placeholder.append "<rocket-form rocket-id=\"#{ data.form_id }\"></rocket-form>"
+                                @currentPlaceholder = $placeholder;
                     embeds:
                         oembedProxy: 'http://medium.iframe.ly/api/oembed?iframe=1'
 
 
-        onBeforeClose: ->
+        onBeforeDestroy: ->
             @editor.deactivate()
 
         # override in child to format save data in a particular way.

@@ -40,6 +40,7 @@ class RocketServiceProvider extends ServiceProvider
         $this->app->bind('Rocket\Settings\SettingRepository', 'Rocket\Settings\EloquentSettingRepository');
         $this->app->bind('Rocket\Accounts\UserRepository', 'Rocket\Accounts\EloquentUserRepository');
         $this->app->bind('Rocket\Media\MediaRepository', 'Rocket\Media\EloquentMediaRepository');
+        $this->app->bind('Rocket\Forms\FormRepository', 'Rocket\Forms\EloquentFormRepository');
     }
 
     /**

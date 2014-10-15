@@ -33,18 +33,26 @@
                 buttons: [ 'bold', 'italic', 'underline', 'anchor', 'header1', 'header2', 'quote', 'unorderedlist' ]
                 buttonLabels: 'fontawesome'
 
+            that = @
             @ui.editor.mediumInsert
                 editor: @editor
                 addons:
-                    forms: {}
+                    forms:
+                        setForm: ( $placeholder, that ) ->
+                            # DO WHATEVER YOU WANT HERE
+                            controller = App.request( 'form:prompt' )
+                            controller.view.on 'prompt:submit', ( data ) ->
+                                $placeholder.append "<rocket-form rocket-id=\"#{ data.form_id }\"></rocket-form>"
+                                @currentPlaceholder = $placeholder;
+
                     embeds:
                         oembedProxy: 'http://medium.iframe.ly/api/oembed?iframe=1'
 
             App.vent.trigger "setup:dropzone", "#dropzone-attachment", @model.get( "image" )
 
-        onBeforeClose: ->
+        onBeforeDestroy: ->
             @editor.deactivate()
-            @publishAt.destroy()
+            @publishAt.data( "DateTimePicker" ).destroy()
 
         # override in child to format save data in a particular way.
         # It could be setting a particular date format or setting the

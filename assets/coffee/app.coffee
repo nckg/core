@@ -41,6 +41,7 @@
         # leftRegion: '#leftRegionft-region'
         mainRegion: '#main-region'
         flashRegion: '#flash-message'
+        dialogRegion: Marionette.Region.Dialog.extend el: "#dialog-region"
 
     # When our app starts go ahead and start the header.
     App.addInitializer ->

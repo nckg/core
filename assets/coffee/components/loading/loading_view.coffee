@@ -4,5 +4,5 @@
 
         template: 'assets/coffee/components/loading/templates/loading'
 
-        className: 'loading-container'
+        className: 'loading'
 

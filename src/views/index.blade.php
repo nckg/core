@@ -9,6 +9,7 @@
             </div>
         </div>
     </div>
+    <div id="dialog-region" class="modal fade"></div>
 @stop
 
 @section('footer.js')

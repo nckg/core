@@ -1,4 +1,4 @@
-.loading-container {
+.loading {
   min-height: 100px;
   height: 100%;
   position: fixed;
@@ -6,13 +6,32 @@
   left: 0;
   right: 0;
   bottom: 0;
-
-  .loading {
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    text-align: center;
-    transform: translate(-50%, -50%);
-    -webkit-transform: translate(-50%, -50%);
-  }
+}
+.loading .loading-text {
+  .text-muted;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  text-align: center;
+  transform: translate(-50%, -50%);
+  -webkit-transform: translate(-50%, -50%);
+}
+.modal .loading .loading-text {
+  color: @body-bg;
+}
+.loading-bullet--0 {
+  -webkit-animation:bounce 1s infinite;
+  -webkit-animation-delay: .1s;
+}
+.loading-bullet--1 {
+  -webkit-animation:bounce 1s infinite;
+  -webkit-animation-delay: .3s;
+}
+.loading-bullet--2 {
+  -webkit-animation:bounce 1s infinite ease;
+  -webkit-animation-delay: .5s;
+}
+@-webkit-keyframes bounce {
+  0% { opacity: 0; }
+  60% { opacity: 1; }
 }

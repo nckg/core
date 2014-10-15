@@ -196,29 +196,30 @@ __p += '<form class="form" data-parsley-validate>\n    <div class="row">\n      
 return __p
 };
 
-this["JST"]["articles/show/templates/header.html"] = function(obj) {
-obj || (obj = {});
-var __t, __p = '', __e = _.escape;
-with (obj) {
-__p += '<div class="col-md-8">\n    <h3><a href="#project/' +
-((__t = ( id )) == null ? '' : __t) +
-'">' +
-((__t = ( title )) == null ? '' : __t) +
-'</a> <a href="' +
-((__t = ( reference )) == null ? '' : __t) +
-'" target="_blank"><i class="fa fa-external-link"></i></a></h3>\n</div>\n<div class="col-md-4">\n    <div class="btn-group pull-right">\n        <button type="button" class="btn btn-sm btn-primary dropdown-toggle" data-toggle="dropdown">\n            <i class="fa fa-cog fa-fw"></i>\n        </button>\n        <ul class="dropdown-menu pull-right">\n            <li><a href="#" data-action="trigger-new-build"><i class="fa fa-rotate-right fa-fw"></i> Start new build</a></li>\n            <li><a href="#project/' +
-((__t = ( id )) == null ? '' : __t) +
-'/settings"><i class="fa fa-cog fa-fw"></i> Settings</a></li>\n        </ul>\n    </div>\n</div>';
-
-}
-return __p
-};
-
 this["JST"]["articles/show/templates/layout.html"] = function(obj) {
 obj || (obj = {});
 var __t, __p = '', __e = _.escape;
 with (obj) {
 __p += '';
+
+}
+return __p
+};
+
+this["JST"]["form/prompt/templates/prompt.html"] = function(obj) {
+obj || (obj = {});
+var __t, __p = '', __e = _.escape, __j = Array.prototype.join;
+function print() { __p += __j.call(arguments, '') }
+with (obj) {
+__p += '<form class="modal-dialog">\n    <div class="modal-content">\n        <div class="modal-header">\n            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>\n            <h4 class="modal-title">Kies een formulier</h4>\n        </div>\n        <div class="modal-body">\n            <select name="form_id" class="form-control" required>\n                <option value="">Kies een formulier</option>\n                ';
+ _.each( items, function( item ) { ;
+__p += '\n                <option value="' +
+((__t = ( item.id )) == null ? '' : __t) +
+'">' +
+((__t = ( item.title )) == null ? '' : __t) +
+'</option>\n                ';
+ } ); ;
+__p += '\n            </select>\n        </div>\n        <div class="modal-footer">\n            <button type="button" class="btn btn-default" data-dismiss="modal">Annuleer en sluit</button>\n            <button type="submit" class="btn btn-primary">Toevoegen</button>\n        </div>\n    </div><!-- /.modal-content -->\n</form><!-- /.modal-dialog -->';
 
 }
 return __p
@@ -340,24 +341,6 @@ __p += '<div class="row action-row">\n    <div class="col-md-offset-6 col-md-6 t
 return __p
 };
 
-this["JST"]["pages/show/templates/header.html"] = function(obj) {
-obj || (obj = {});
-var __t, __p = '', __e = _.escape;
-with (obj) {
-__p += '<div class="col-md-8">\n    <h3><a href="#project/' +
-((__t = ( id )) == null ? '' : __t) +
-'">' +
-((__t = ( title )) == null ? '' : __t) +
-'</a> <a href="' +
-((__t = ( reference )) == null ? '' : __t) +
-'" target="_blank"><i class="fa fa-external-link"></i></a></h3>\n</div>\n<div class="col-md-4">\n    <div class="btn-group pull-right">\n        <button type="button" class="btn btn-sm btn-primary dropdown-toggle" data-toggle="dropdown">\n            <i class="fa fa-cog fa-fw"></i>\n        </button>\n        <ul class="dropdown-menu pull-right">\n            <li><a href="#" data-action="trigger-new-build"><i class="fa fa-rotate-right fa-fw"></i> Start new build</a></li>\n            <li><a href="#project/' +
-((__t = ( id )) == null ? '' : __t) +
-'/settings"><i class="fa fa-cog fa-fw"></i> Settings</a></li>\n        </ul>\n    </div>\n</div>';
-
-}
-return __p
-};
-
 this["JST"]["pages/show/templates/layout.html"] = function(obj) {
 obj || (obj = {});
 var __t, __p = '', __e = _.escape;
@@ -469,7 +452,17 @@ this["JST"]["assets/coffee/components/loading/templates/loading.html"] = functio
 obj || (obj = {});
 var __t, __p = '', __e = _.escape;
 with (obj) {
-__p += '<h3 class="loading text-muted"><i class="fa fa-fw fa-rocket"></i> Laden...</h3>';
+__p += '<h3 class="loading-text"><i class="fa fa-fw fa-rocket"></i>\n    <span>Loading</span>\n    <span class="loading-bullet--0">.</span>\n    <span class="loading-bullet--1">.</span>\n    <span class="loading-bullet--2">.</span>\n</h3>';
+
+}
+return __p
+};
+
+this["JST"]["assets/coffee/views/templates/prompt.html"] = function(obj) {
+obj || (obj = {});
+var __t, __p = '', __e = _.escape;
+with (obj) {
+__p += 'hello';
 
 }
 return __p
@@ -619,11 +612,6 @@ var __hasProp = {}.hasOwnProperty,
           return _this.closeDialog();
         };
       })(this));
-      this.$el.on("shown", (function(_this) {
-        return function() {
-          return Snappy.execute("dialog:shown", view);
-        };
-      })(this));
       return this.$el.modal(options);
     };
 
@@ -641,13 +629,15 @@ var __hasProp = {}.hasOwnProperty,
     };
 
     Dialog.prototype.setupBindings = function(view) {
-      return this.listenTo(view, "dialog:close", this.closeDialog);
+      return this.listenTo(view, "dialog:close", function() {
+        return this.$el.modal("hide");
+      }, this);
     };
 
     Dialog.prototype.closeDialog = function() {
+      console.log(this, arguments);
       this.stopListening();
-      this.close();
-      return this.$el.modal("hide");
+      return this.destroy();
     };
 
     return Dialog;
@@ -666,18 +656,31 @@ Backbone.Marionette.Renderer.render = function(template, data) {
 
 (function($) {
   return $.fn.mediumInsert.registerAddon("forms", {
+    defaults: {
+      setForm: function($placeholder, that) {
+        var formId;
+        formId = prompt("Formulier ID", "1");
+        if (formId !== null) {
+          $placeholder.append("<rocket-form rocket-id=\"" + formId + "\"></rocket-form>");
+          return that.currentPlaceholder = $placeholder;
+        }
+      }
+    },
 
     /**
     Maps initial function
     @return {void}
      */
-    init: function() {
+    init: function(options) {
+      this.options = $.extend(this.defaults, options);
       this.$el = $.fn.mediumInsert.insert.$el;
       return this.preparePreviousForms();
     },
     insertButton: function(buttonLabels) {
-      console.log(buttonLabels);
       return '<button data-addon="forms" data-action="add" class="medium-editor-action mediumInsert-action"> <i class="fa fa-fw fa-check-square"></i> </button>';
+    },
+    setForm: function($placeholder, that) {
+      return that.options.setForm($placeholder, that);
     },
 
     /**
@@ -686,13 +689,8 @@ Backbone.Marionette.Renderer.render = function(template, data) {
     @return {void}
      */
     add: function($placeholder) {
-      var formId;
       $.fn.mediumInsert.insert.deselect();
-      formId = prompt("Formulier ID", "1");
-      if (formId !== null) {
-        $placeholder.append("<rocket-form rocket-id=\"" + formId + "\"></rocket-form>");
-        return this.currentPlaceholder = $placeholder;
-      }
+      return this.setForm($placeholder, this);
     },
     preparePreviousForms: function() {
       return this.$el.find('rocket-form').each(function() {
@@ -811,7 +809,10 @@ this.Rocket = (function(Backbone, Marionette) {
   App.addRegions({
     headerRegion: '#header-region',
     mainRegion: '#main-region',
-    flashRegion: '#flash-message'
+    flashRegion: '#flash-message',
+    dialogRegion: Marionette.Region.Dialog.extend({
+      el: "#dialog-region"
+    })
   });
   App.addInitializer(function() {
     return App.module('HeaderApp').start();
@@ -1063,6 +1064,70 @@ this.Rocket.module('Entities', function(Entities, App, Backbone, Marionette, $, 
   });
   return App.reqres.setHandler('new:article:entity', function() {
     return API.newPage();
+  });
+});
+
+var __hasProp = {}.hasOwnProperty,
+  __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
+
+this.Rocket.module('Entities', function(Entities, App) {
+  var API;
+  Entities.Form = (function(_super) {
+    __extends(Form, _super);
+
+    function Form() {
+      return Form.__super__.constructor.apply(this, arguments);
+    }
+
+    Form.prototype.defaults = {
+      id: null,
+      title: '',
+      email_to: '',
+      success: '',
+      fields: []
+    };
+
+    Form.prototype.urlRoot = function() {
+      return App.request('get:url:api') + '/form';
+    };
+
+    return Form;
+
+  })(App.Entities.Model);
+  Entities.FormCollection = (function(_super) {
+    __extends(FormCollection, _super);
+
+    function FormCollection() {
+      return FormCollection.__super__.constructor.apply(this, arguments);
+    }
+
+    FormCollection.prototype.model = Entities.Form;
+
+    FormCollection.prototype.url = function() {
+      return App.request('get:url:api') + '/form';
+    };
+
+    return FormCollection;
+
+  })(App.Entities.Collection);
+  API = {
+    getAll: function() {
+      var model;
+      model = new Entities.FormCollection;
+      model.fetch({
+        reset: true
+      });
+      return model;
+    },
+    newSetting: function() {
+      return new Entities.Form;
+    }
+  };
+  App.reqres.setHandler('form:entities', function() {
+    return API.getAll();
+  });
+  return App.reqres.setHandler('new:form:entity', function() {
+    return API.newSetting();
   });
 });
 
@@ -1709,6 +1774,58 @@ this.Rocket.module("Views", function(Views, App, Backbone, Marionette, $, _) {
 var __hasProp = {}.hasOwnProperty,
   __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
 
+this.Rocket.module("Views", function(Views, App, Backbone, Marionette, $, _) {
+  return Views.BasePrompt = (function(_super) {
+    __extends(BasePrompt, _super);
+
+    function BasePrompt() {
+      return BasePrompt.__super__.constructor.apply(this, arguments);
+    }
+
+    BasePrompt.prototype.template = 'assets/coffee/views/templates/prompt';
+
+    BasePrompt.prototype.tagName = 'form';
+
+    BasePrompt.prototype.triggers = {
+      "submit form": "form:submit"
+    };
+
+    BasePrompt.prototype.init = function() {
+      this.events = _.extend({}, this.baseEvents, this.events);
+    };
+
+    BasePrompt.prototype.initialize = function(options) {
+      this.init.call(this);
+      this.options = options;
+      return this.events = _.extend({}, this.baseFormEvents, this.events);
+    };
+
+    BasePrompt.prototype.formatSaveData = function(data) {
+      return data;
+    };
+
+    BasePrompt.prototype.getSaveData = function() {
+      var data;
+      data = Backbone.Syphon.serialize(this);
+      return this.formatSaveData(data);
+    };
+
+    BasePrompt.prototype.save = function(e) {
+      e.preventDefault();
+      if (!this.ui.form.parsley().validate()) {
+        return;
+      }
+      return this.model.save(this.getSaveData());
+    };
+
+    return BasePrompt;
+
+  })(App.Views.ItemView);
+});
+
+var __hasProp = {}.hasOwnProperty,
+  __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
+
 this.Rocket.module("Views", function(Views, App) {
   return Views.Treeview = (function(_super) {
     __extends(Treeview, _super);
@@ -2236,6 +2353,7 @@ this.Rocket.module('Views', function(Views, App, Backbone, Marionette, $, _) {
     };
 
     ArticleView.prototype.onShow = function() {
+      var that;
       this.publishAt = this.ui.publishAt.datetimepicker({
         format: 'YYYY-MM-DD HH:mm',
         icons: {
@@ -2249,10 +2367,20 @@ this.Rocket.module('Views', function(Views, App, Backbone, Marionette, $, _) {
         buttons: ['bold', 'italic', 'underline', 'anchor', 'header1', 'header2', 'quote', 'unorderedlist'],
         buttonLabels: 'fontawesome'
       });
+      that = this;
       this.ui.editor.mediumInsert({
         editor: this.editor,
         addons: {
-          forms: {},
+          forms: {
+            setForm: function($placeholder, that) {
+              var controller;
+              controller = App.request('form:prompt');
+              return controller.view.on('prompt:submit', function(data) {
+                $placeholder.append("<rocket-form rocket-id=\"" + data.form_id + "\"></rocket-form>");
+                return this.currentPlaceholder = $placeholder;
+              });
+            }
+          },
           embeds: {
             oembedProxy: 'http://medium.iframe.ly/api/oembed?iframe=1'
           }
@@ -2261,9 +2389,9 @@ this.Rocket.module('Views', function(Views, App, Backbone, Marionette, $, _) {
       return App.vent.trigger("setup:dropzone", "#dropzone-attachment", this.model.get("image"));
     };
 
-    ArticleView.prototype.onBeforeClose = function() {
+    ArticleView.prototype.onBeforeDestroy = function() {
       this.editor.deactivate();
-      return this.publishAt.destroy();
+      return this.publishAt.data("DateTimePicker").destroy();
     };
 
     ArticleView.prototype.formatSaveData = function(data) {
@@ -2730,6 +2858,88 @@ this.Rocket.module("DropzoneApp", function(DropzoneApp, App, Backbone, Marionett
   });
 });
 
+this.Rocket.module('FormsApp', function(FormsApp, App, Backbone, Marionette, $, _) {
+  var API;
+  API = {
+    prompt: function() {
+      return new FormsApp.Prompt.Controller;
+    }
+  };
+  return App.reqres.setHandler('form:prompt', function() {
+    return API.prompt();
+  });
+});
+
+var __hasProp = {}.hasOwnProperty,
+  __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
+
+this.Rocket.module('FormsApp.Prompt', function(Prompt, App, Backbone, Marionette, $, _) {
+  return Prompt.Controller = (function(_super) {
+    __extends(Controller, _super);
+
+    function Controller() {
+      return Controller.__super__.constructor.apply(this, arguments);
+    }
+
+    Controller.prototype.initialize = function(options) {
+      var collection;
+      collection = App.request('form:entities');
+      this.view = this.getView(collection);
+      return this.show(this.view, {
+        region: App.dialogRegion,
+        loading: {
+          entities: collection
+        }
+      });
+    };
+
+    Controller.prototype.getView = function(collection) {
+      return new Prompt.View({
+        collection: collection
+      });
+    };
+
+    return Controller;
+
+  })(App.Controllers.Base);
+});
+
+var __hasProp = {}.hasOwnProperty,
+  __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
+
+this.Rocket.module('FormsApp.Prompt', function(Prompt, App, Backbone, Marionette, $, _) {
+  return Prompt.View = (function(_super) {
+    __extends(View, _super);
+
+    function View() {
+      return View.__super__.constructor.apply(this, arguments);
+    }
+
+    View.prototype.template = 'form/prompt/templates/prompt';
+
+    View.prototype.ui = {
+      form: 'form',
+      submit: '[type="submit"]'
+    };
+
+    View.prototype.events = {
+      'click @ui.submit': 'save'
+    };
+
+    View.prototype.save = function(e) {
+      e.preventDefault();
+      if (!this.ui.form.parsley().validate()) {
+        return;
+      }
+      this.trigger('prompt:submit', this.getSaveData());
+      return this.trigger('dialog:close');
+    };
+
+    return View;
+
+  })(App.Views.BaseForm);
+});
+
 this.Rocket.module("HeaderApp", function(HeaderApp, App, Backbone, Marionette, $, _) {
   var API;
   this.startWithParent = false;
@@ -2886,6 +3096,7 @@ this.Rocket.module('Views', function(Views, App, Backbone, Marionette, $, _) {
     };
 
     PageView.prototype.onRender = function() {
+      var that;
       this.renderSelect(this.options.templateCollection, this.ui.template, 'id', 'name', this.model.get('template_id'));
       this.renderSelect(this.options.pageCollection.getIndentedList(), this.ui.pages, 'id', function(model) {
         var prefix;
@@ -2896,10 +3107,20 @@ this.Rocket.module('Views', function(Views, App, Backbone, Marionette, $, _) {
         buttons: ['bold', 'italic', 'underline', 'anchor', 'header1', 'header2', 'quote', 'unorderedlist'],
         buttonLabels: 'fontawesome'
       });
+      that = this;
       return this.ui.editor.mediumInsert({
         editor: this.editor,
         addons: {
-          forms: {},
+          forms: {
+            setForm: function($placeholder, that) {
+              var controller;
+              controller = App.request('form:prompt');
+              return controller.view.on('prompt:submit', function(data) {
+                $placeholder.append("<rocket-form rocket-id=\"" + data.form_id + "\"></rocket-form>");
+                return this.currentPlaceholder = $placeholder;
+              });
+            }
+          },
           embeds: {
             oembedProxy: 'http://medium.iframe.ly/api/oembed?iframe=1'
           }
@@ -2907,7 +3128,7 @@ this.Rocket.module('Views', function(Views, App, Backbone, Marionette, $, _) {
       });
     };
 
-    PageView.prototype.onBeforeClose = function() {
+    PageView.prototype.onBeforeDestroy = function() {
       return this.editor.deactivate();
     };
 
@@ -3832,7 +4053,7 @@ this.Rocket.module("Components.Loading", function(Loading, App, Backbone, Marion
 
     LoadingView.prototype.template = 'assets/coffee/components/loading/templates/loading';
 
-    LoadingView.prototype.className = 'loading-container';
+    LoadingView.prototype.className = 'loading';
 
     return LoadingView;
 

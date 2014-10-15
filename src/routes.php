@@ -35,6 +35,7 @@ Route::group(Config::get('routes.api_group_rules'), function() use ($apiNamespac
     Route::resource('image', $apiNamespace . 'ImageController');
     Route::resource('template', $apiNamespace.'TemplateController');
     Route::resource('setting', $apiNamespace.'SettingsController');
+    Route::resource('form', $apiNamespace.'FormController');
     Route::resource('user', $apiNamespace.'UserController');
 });
 
